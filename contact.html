@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact – 7/12 Waale</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --soil-deep:    #0E0905;
+      --soil-mid:     #3D2410;
+      --soil-warm:    #6B4423;
+      --soil-light:   #A8743D;
+      --soil-pale:    #E8C99A;
+      --soil-cream:   #F7F1E8;
+      --plant-deep:   #0D2410;
+      --plant-mid:    #1A5C24;
+      --plant-fresh:  #2E7D36;
+      --plant-lime:   #5EBA62;
+      --plant-mist:   #B5D9B8;
+      --white:        #FFFFFF;
+      --text:         #150A02;
+      --muted:        #7A5E3E;
+      --gold:         #C8963A;
+      --gold-light:   #E8CA80;
+      --gold-glow:    rgba(200,150,58,.35);
+      --green-glow:   rgba(94,186,98,.25);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: 'Outfit', sans-serif; background: var(--soil-cream); color: var(--text); overflow-x: hidden; }
+    a { text-decoration: none; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+      height: 76px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+      background: rgba(247,241,232,0.95);
+      backdrop-filter: blur(24px) saturate(1.6);
+      border-bottom: 1px solid rgba(107,68,35,.12);
+      box-shadow: 0 2px 40px rgba(14,9,5,.08);
+    }
+    .logo-wrap { display: flex; flex-direction: column; line-height: 1; cursor: pointer; }
+    .logo-main { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.75rem; color: var(--soil-mid); letter-spacing: -.5px; }
+    .logo-main span { color: var(--plant-mid); }
+    .logo-sub { font-size: .52rem; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--soil-warm); margin-top: 2px; }
+    .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: .82rem; font-weight: 500; letter-spacing: .4px; color: var(--soil-mid); position: relative; padding-bottom: 4px; transition: color .25s; }
+    .nav-links a::after { content: ''; position: absolute; left: 0; bottom: 0; width: 0; height: 1.5px; background: linear-gradient(90deg, var(--plant-mid), var(--plant-lime)); transition: width .3s ease; }
+    .nav-links a:hover, .nav-links a.active { color: var(--plant-mid); }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+    .btn-nav { background: linear-gradient(135deg, var(--plant-mid), var(--plant-fresh)) !important; color: var(--white) !important; padding: .52rem 1.5rem !important; border-radius: 6px; font-size: .8rem !important; font-weight: 600 !important; letter-spacing: .4px; box-shadow: 0 3px 18px var(--green-glow); transition: transform .2s, box-shadow .25s !important; }
+    .btn-nav::after { display: none !important; }
+    .btn-nav:hover { transform: translateY(-2px) !important; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { width: 22px; height: 2px; background: var(--soil-mid); border-radius: 2px; transition: .3s; display: block; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* PAGE */
+    .page-wrap {
+      min-height: 100vh;
+      padding: 76px 0 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    /* LEFT PANEL */
+    .left-panel {
+      background: linear-gradient(160deg, #0e0905 0%, #1a0c04 45%, #0d1a0d 100%);
+      position: relative; overflow: hidden;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 5rem 7% 5rem 7%;
+    }
+    .left-panel .bg-orb1 {
+      position: absolute; top: -10%; left: -15%;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(26,92,36,.18) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .left-panel .bg-orb2 {
+      position: absolute; bottom: -10%; right: -10%;
+      width: 380px; height: 380px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,150,58,.1) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .left-panel .grid-lines {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);
+      background-size: 70px 70px;
+    }
+    .left-inner { position: relative; z-index: 2; }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: .6rem;
+      background: rgba(94,186,98,.1); border: 1px solid rgba(94,186,98,.25);
+      color: var(--plant-lime);
+      font-size: .65rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+      padding: .42rem 1rem; border-radius: 4px;
+      margin-bottom: 2rem; width: fit-content;
+    }
+    .eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--plant-lime); box-shadow: 0 0 8px var(--plant-lime); animation: pulse 2.5s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.4;} }
+
+    .panel-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 3.5vw, 3.4rem); font-weight: 700; line-height: 1.1;
+      color: var(--white); margin-bottom: 1.2rem;
+    }
+    .panel-title em {
+      display: block; font-style: italic;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .panel-desc { font-size: .92rem; line-height: 1.85; color: rgba(232,201,154,.5); max-width: 420px; margin-bottom: 3rem; }
+
+    .contact-detail { display: flex; flex-direction: column; gap: .9rem; }
+    .cd-item {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1rem 1.2rem; border-radius: 12px;
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07);
+    }
+    .cd-icon { font-size: 1.1rem; flex-shrink: 0; }
+    .cd-text { font-size: .85rem; color: rgba(232,201,154,.65); }
+    .cd-text strong { display: block; font-size: .75rem; color: rgba(232,201,154,.35); font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin-bottom: .2rem; }
+
+    /* RIGHT PANEL — FORM */
+    .right-panel {
+      background: var(--soil-cream);
+      display: flex; align-items: center; justify-content: center;
+      padding: 4rem 7%;
+    }
+    .form-card {
+      background: var(--white);
+      border-radius: 20px;
+      border: 1px solid rgba(107,68,35,.1);
+      box-shadow: 0 8px 48px rgba(14,9,5,.07);
+      padding: 2.8rem 2.6rem;
+      width: 100%; max-width: 480px;
+    }
+
+    .form-card h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem; font-weight: 700; color: var(--soil-deep);
+      margin-bottom: .4rem;
+    }
+    .form-card h2 span { color: var(--plant-mid); font-style: italic; }
+    .form-subtitle { font-size: .82rem; color: var(--muted); margin-bottom: 2rem; line-height: 1.6; }
+
+    .form-group { margin-bottom: 1.4rem; }
+    .form-group label {
+      display: block; font-size: .72rem; font-weight: 600;
+      letter-spacing: 1px; text-transform: uppercase;
+      color: var(--soil-warm); margin-bottom: .55rem;
+    }
+    .form-group input[type="text"],
+    .form-group input[type="tel"] {
+      width: 100%; padding: .82rem 1.1rem;
+      border: 1.5px solid rgba(107,68,35,.15);
+      border-radius: 10px; font-family: 'Outfit', sans-serif;
+      font-size: .92rem; color: var(--text);
+      background: var(--soil-cream);
+      outline: none; transition: border-color .25s, box-shadow .25s;
+    }
+    .form-group input:focus {
+      border-color: var(--plant-mid);
+      box-shadow: 0 0 0 3px rgba(26,92,36,.1);
+      background: var(--white);
+    }
+    .form-group input::placeholder { color: rgba(107,68,35,.35); }
+
+    /* plot type selector */
+    .plot-options { display: flex; flex-direction: column; gap: .75rem; }
+    .plot-option { position: relative; }
+    .plot-option input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
+    .plot-option label {
+      display: flex; align-items: center; gap: 1rem;
+      padding: .95rem 1.2rem; border-radius: 12px;
+      border: 1.5px solid rgba(107,68,35,.12);
+      cursor: pointer; transition: border-color .25s, background .25s, box-shadow .25s;
+      text-transform: none; letter-spacing: 0; font-size: .9rem;
+      font-weight: 500; color: var(--soil-mid);
+      background: var(--soil-cream);
+    }
+    .plot-option input[type="radio"]:checked + label {
+      border-color: var(--plant-mid);
+      background: rgba(26,92,36,.06);
+      box-shadow: 0 0 0 3px rgba(26,92,36,.09);
+      color: var(--plant-deep);
+    }
+    .plot-option label:hover { border-color: var(--plant-mid); background: rgba(26,92,36,.04); }
+
+    .opt-icon {
+      width: 38px; height: 38px; border-radius: 9px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      background: rgba(107,68,35,.07);
+      transition: background .25s;
+    }
+    .plot-option input[type="radio"]:checked + label .opt-icon {
+      background: rgba(26,92,36,.14);
+    }
+    .opt-info { display: flex; flex-direction: column; }
+    .opt-info span { font-size: .75rem; color: var(--muted); font-weight: 400; margin-top: .15rem; }
+
+    .radio-check {
+      margin-left: auto; width: 20px; height: 20px; border-radius: 50%;
+      border: 2px solid rgba(107,68,35,.2);
+      transition: border-color .25s, background .25s;
+      flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+    }
+    .radio-check::after { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--plant-mid); opacity: 0; transition: opacity .2s; }
+    .plot-option input[type="radio"]:checked + label .radio-check { border-color: var(--plant-mid); }
+    .plot-option input[type="radio"]:checked + label .radio-check::after { opacity: 1; }
+
+    .btn-whatsapp {
+      width: 100%; padding: 1.05rem;
+      background: linear-gradient(135deg, #1DA851 0%, #128C3E 100%);
+      color: var(--white); border: none; border-radius: 12px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1rem; font-weight: 700; letter-spacing: .3px;
+      cursor: pointer; margin-top: 2rem;
+      display: flex; align-items: center; justify-content: center; gap: .7rem;
+      box-shadow: 0 6px 28px rgba(29,168,81,.3);
+      transition: transform .25s, box-shadow .25s;
+    }
+    .btn-whatsapp:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(29,168,81,.4); }
+    .btn-whatsapp svg { width: 22px; height: 22px; fill: var(--white); flex-shrink: 0; }
+
+    .form-note { text-align: center; font-size: .73rem; color: var(--muted); margin-top: 1rem; line-height: 1.6; }
+
+    /* FOOTER STRIP */
+    .foot-strip {
+      background: #060402;
+      padding: 2rem 7%;
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid rgba(255,255,255,.05);
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .foot-strip p { font-size: .77rem; color: rgba(232,201,154,.22); }
+    .foot-links { display: flex; gap: 2rem; }
+    .foot-links a { font-size: .77rem; color: rgba(232,201,154,.22); transition: color .2s; }
+    .foot-links a:hover { color: var(--plant-lime); }
+
+    /* RESPONSIVE */
+    @media(max-width: 900px) {
+      .page-wrap { grid-template-columns: 1fr; }
+      .left-panel { padding: 4rem 7% 3rem; min-height: auto; }
+      .panel-title { font-size: 2.2rem; }
+      .right-panel { padding: 3rem 5%; }
+      .form-card { padding: 2rem 1.8rem; }
+      nav ul { display: none; flex-direction: column; position: absolute; top: 76px; left: 0; right: 0; background: rgba(247,241,232,.97); padding: 1.5rem 7%; border-bottom: 1px solid rgba(107,68,35,.1); gap: 1.2rem; backdrop-filter: blur(20px); }
+      nav ul.open { display: flex; }
+      .hamburger { display: flex; }
+    }
+    @media(max-width: 520px) {
+      .form-card { padding: 1.6rem 1.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="logo-wrap">
+    <div class="logo-main">7/12 <span>Waale</span></div>
+    <div class="logo-sub">Plots & Land Experts · Maharashtra</div>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="mumbai.html">Why Mumbai 3.0</a></li>
+    <li><a href="listings.html">Our Plots</a></li>
+    <li><a href="contact.html" class="btn-nav active">Enquire Now</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="page-wrap">
+
+  <!-- LEFT -->
+  <div class="left-panel">
+    <div class="bg-orb1"></div>
+    <div class="bg-orb2"></div>
+    <div class="grid-lines"></div>
+    <div class="left-inner">
+      <div class="eyebrow"><span class="eyebrow-dot"></span>Get In Touch</div>
+      <h2 class="panel-title">Let's Find Your<em>Perfect Plot.</em></h2>
+      <p class="panel-desc">Fill in the form — we'll open a WhatsApp conversation so you can get answers instantly from our land experts.</p>
+
+      <div class="contact-detail">
+        <div class="cd-item">
+          <span class="cd-icon">📞</span>
+          <div class="cd-text">
+            <strong>Call / WhatsApp</strong>
+            +91 91726 95325
+          </div>
+        </div>
+        <div class="cd-item">
+          <span class="cd-icon">📍</span>
+          <div class="cd-text">
+            <strong>Serving</strong>
+            Panvel · Pen · Alibaug · Khopoli · Uran · Karjat
+          </div>
+        </div>
+        <div class="cd-item">
+          <span class="cd-icon">⏰</span>
+          <div class="cd-text">
+            <strong>Working Hours</strong>
+            Mon – Sat, 9 AM – 7 PM
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT — FORM -->
+  <div class="right-panel">
+    <div class="form-card">
+      <h2>Quick <span>Enquiry</span></h2>
+      <p class="form-subtitle">Takes 30 seconds — we'll connect you on WhatsApp right away.</p>
+
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" id="inp-name" placeholder="e.g. Rahul Sharma" autocomplete="name"/>
+      </div>
+
+      <div class="form-group">
+        <label>Mobile Number</label>
+        <input type="tel" id="inp-phone" placeholder="e.g. 98765 43210" maxlength="15" autocomplete="tel"/>
+      </div>
+
+      <div class="form-group">
+        <label>What are you looking for?</label>
+        <div class="plot-options">
+
+          <div class="plot-option">
+            <input type="radio" name="plot-type" id="opt-investment" value="Investment Plot"/>
+            <label for="opt-investment">
+              <div class="opt-icon">📈</div>
+              <div class="opt-info">Investment Plot<span>Buy, hold &amp; grow your wealth</span></div>
+              <div class="radio-check"></div>
+            </label>
+          </div>
+
+          <div class="plot-option">
+            <input type="radio" name="plot-type" id="opt-bungalow" value="Bungalow Plot"/>
+            <label for="opt-bungalow">
+              <div class="opt-icon">🏡</div>
+              <div class="opt-info">Bungalow Plot<span>Build your dream home</span></div>
+              <div class="radio-check"></div>
+            </label>
+          </div>
+
+          <div class="plot-option">
+            <input type="radio" name="plot-type" id="opt-villa" value="Villa Plot"/>
+            <label for="opt-villa">
+              <div class="opt-icon">🏘️</div>
+              <div class="opt-info">Villa Plot<span>Premium gated &amp; scenic land</span></div>
+              <div class="radio-check"></div>
+            </label>
+          </div>
+
+        </div>
+      </div>
+
+      <button class="btn-whatsapp" onclick="sendToWhatsApp()">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.555 4.12 1.524 5.857L0 24l6.29-1.504A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.371l-.36-.213-3.732.893.928-3.627-.235-.374A9.78 9.78 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/>
+        </svg>
+        Chat on WhatsApp
+      </button>
+
+      <p class="form-note">You'll be redirected to WhatsApp with your details pre-filled. We typically reply within minutes.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER STRIP -->
+<div class="foot-strip">
+  <p>© 2025 7/12 Waale. All rights reserved.</p>
+  <div class="foot-links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms of Use</a>
+    <a href="#">Disclaimer</a>
+  </div>
+</div>
+
+<script>
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+    document.getElementById('hamburger').classList.toggle('open');
+  }
+
+  function sendToWhatsApp() {
+    const name    = document.getElementById('inp-name').value.trim();
+    const phone   = document.getElementById('inp-phone').value.trim();
+    const typeEl  = document.querySelector('input[name="plot-type"]:checked');
+    const plotType = typeEl ? typeEl.value : '';
+
+    if (!name) { alert('Please enter your name.'); document.getElementById('inp-name').focus(); return; }
+    if (!phone || phone.length < 8) { alert('Please enter a valid mobile number.'); document.getElementById('inp-phone').focus(); return; }
+    if (!plotType) { alert('Please select what you are looking for.'); return; }
+
+    const msg = `Hello 7/12 Waale! 👋\n\nI'm interested in a plot.\n\n*Name:* ${name}\n*Contact:* ${phone}\n*Looking for:* ${plotType}\n\nPlease guide me further.`;
+
+    const waNumber = '919172695325';
+    const encoded  = encodeURIComponent(msg);
+    window.open(`https://wa.me/${waNumber}?text=${encoded}`, '_blank');
+  }
+</script>
+</body>
+</html>

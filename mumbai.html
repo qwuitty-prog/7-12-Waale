@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Why Mumbai 3.0 – 7/12 Waale</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --soil-deep:    #0E0905;
+      --soil-mid:     #3D2410;
+      --soil-warm:    #6B4423;
+      --soil-light:   #A8743D;
+      --soil-pale:    #E8C99A;
+      --soil-cream:   #F7F1E8;
+      --plant-deep:   #0D2410;
+      --plant-mid:    #1A5C24;
+      --plant-fresh:  #2E7D36;
+      --plant-lime:   #5EBA62;
+      --plant-mist:   #B5D9B8;
+      --white:        #FFFFFF;
+      --text:         #150A02;
+      --muted:        #7A5E3E;
+      --gold:         #C8963A;
+      --gold-light:   #E8CA80;
+      --gold-glow:    rgba(200,150,58,.35);
+      --green-glow:   rgba(94,186,98,.25);
+      --card-bg:      rgba(255,255,255,0.72);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: 'Outfit', sans-serif; background: var(--soil-cream); color: var(--text); overflow-x: hidden; }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; }
+
+    /* highlight helpers */
+    .hl-mumbai {
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; font-weight: 700;
+    }
+    .hl-growth {
+      color: var(--plant-fresh); font-weight: 700;
+      text-shadow: 0 0 18px rgba(46,125,54,.3);
+    }
+    .hl-underline {
+      text-decoration: underline;
+      text-decoration-color: var(--gold);
+      text-underline-offset: 3px;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+      height: 76px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+      background: rgba(247,241,232,0.88);
+      backdrop-filter: blur(24px) saturate(1.6);
+      border-bottom: 1px solid rgba(107,68,35,.12);
+      transition: box-shadow .4s, background .4s;
+    }
+    nav.scrolled {
+      background: rgba(247,241,232,0.97);
+      box-shadow: 0 2px 40px rgba(14,9,5,.10);
+    }
+    .logo-wrap { display: flex; flex-direction: column; line-height: 1; cursor: pointer; }
+    .logo-main { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.75rem; color: var(--soil-mid); letter-spacing: -.5px; }
+    .logo-main span { color: var(--plant-mid); }
+    .logo-sub { font-size: .52rem; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--soil-warm); margin-top: 2px; }
+    .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: .82rem; font-weight: 500; letter-spacing: .4px; color: var(--soil-mid); position: relative; padding-bottom: 4px; transition: color .25s; }
+    .nav-links a::after { content: ''; position: absolute; left: 0; bottom: 0; width: 0; height: 1.5px; background: linear-gradient(90deg, var(--plant-mid), var(--plant-lime)); transition: width .3s ease; }
+    .nav-links a:hover, .nav-links a.active { color: var(--plant-mid); }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+    .btn-nav { background: linear-gradient(135deg, var(--plant-mid), var(--plant-fresh)) !important; color: var(--white) !important; padding: .52rem 1.5rem !important; border-radius: 6px; font-size: .8rem !important; font-weight: 600 !important; letter-spacing: .4px; box-shadow: 0 3px 18px var(--green-glow); transition: transform .2s, box-shadow .25s !important; }
+    .btn-nav::after { display: none !important; }
+    .btn-nav:hover { transform: translateY(-2px) !important; box-shadow: 0 8px 28px var(--green-glow) !important; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { width: 22px; height: 2px; background: var(--soil-mid); border-radius: 2px; transition: .3s; display: block; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh;
+      padding-top: 76px;
+      display: flex; flex-direction: column; justify-content: center;
+      position: relative; overflow: hidden;
+      background: #0a0603;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 80% at 10% 50%, rgba(61,36,16,.85) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 70% at 90% 20%, rgba(200,150,58,.07) 0%, transparent 55%),
+        radial-gradient(ellipse 80% 100% at 0% 100%, rgba(13,36,16,.6) 0%, transparent 55%),
+        linear-gradient(160deg, #0e0905 0%, #1a0c04 35%, #0d1a0d 100%);
+    }
+    .hero-img-overlay {
+      position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1529253355930-ddbe423a2ac7?w=1800&q=70');
+      background-size: cover; background-position: center;
+      opacity: .12; mix-blend-mode: luminosity;
+    }
+    .hero-grid-lines {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: linear-gradient(rgba(255,255,255,.022) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px);
+      background-size: 80px 80px;
+    }
+    .orb1 { position: absolute; top: 5%; left: -8%; width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(26,92,36,.18) 0%, transparent 65%); animation: float1 12s ease-in-out infinite; pointer-events: none; }
+    .orb2 { position: absolute; bottom: -10%; right: 0%; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(200,150,58,.10) 0%, transparent 65%); animation: float2 14s ease-in-out infinite; pointer-events: none; }
+    @keyframes float1 { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(30px,-20px) scale(1.05);} }
+    @keyframes float2 { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(-20px,25px) scale(1.08);} }
+
+    .hero-inner {
+      position: relative; z-index: 2;
+      padding: 6rem 7% 5rem;
+      max-width: 900px;
+    }
+    .eyebrow { display: inline-flex; align-items: center; gap: .6rem; background: rgba(94,186,98,.1); border: 1px solid rgba(94,186,98,.25); color: var(--plant-lime); font-size: .65rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; padding: .42rem 1rem; border-radius: 4px; margin-bottom: 2rem; width: fit-content; animation: fadeUp .7s ease both; }
+    .eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--plant-lime); box-shadow: 0 0 8px var(--plant-lime); animation: pulse 2.5s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.4;} }
+
+    .hero-h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 6vw, 6rem);
+      font-weight: 700; line-height: 1.05;
+      color: var(--white); margin-bottom: 1.6rem;
+      animation: fadeUp .7s .1s ease both;
+    }
+    .hero-h1 .accent {
+      display: block; font-style: italic;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--plant-lime));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      filter: drop-shadow(0 0 24px var(--gold-glow));
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 1.5vw, 1.22rem); line-height: 1.85;
+      color: rgba(232,201,154,.65); max-width: 620px;
+      margin-bottom: 3rem; animation: fadeUp .7s .2s ease both; font-weight: 400;
+    }
+    .hero-sub strong { color: var(--gold); font-weight: 600; }
+
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp .7s .3s ease both; }
+    .btn-primary { background: linear-gradient(135deg, var(--plant-mid) 0%, var(--plant-fresh) 100%); color: var(--white); padding: .9rem 2.4rem; border-radius: 7px; font-weight: 600; font-size: .92rem; letter-spacing: .3px; display: inline-flex; align-items: center; gap: .5rem; box-shadow: 0 6px 32px var(--green-glow), 0 0 0 1px rgba(94,186,98,.15); transition: transform .25s, box-shadow .25s; }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 48px var(--green-glow); }
+    .btn-gold-outline { border: 1.5px solid rgba(200,150,58,.45); color: var(--gold-light); padding: .9rem 2.4rem; border-radius: 7px; font-weight: 500; font-size: .92rem; display: inline-flex; align-items: center; gap: .5rem; transition: background .25s, border-color .25s, transform .25s; backdrop-filter: blur(8px); }
+    .btn-gold-outline:hover { background: rgba(200,150,58,.12); border-color: var(--gold); transform: translateY(-3px); }
+
+    /* version numbers strip */
+    .version-strip {
+      position: relative; z-index: 2;
+      padding: 0 7% 4rem;
+      display: flex; gap: 3rem; flex-wrap: wrap;
+      animation: fadeUp .7s .45s ease both;
+    }
+    .vcard {
+      flex: 1; min-width: 160px; max-width: 220px;
+      padding: 1.4rem 1.6rem; border-radius: 12px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.09);
+      transition: background .3s, border-color .3s, transform .3s;
+    }
+    .vcard:hover { background: rgba(94,186,98,.08); border-color: rgba(94,186,98,.2); transform: translateY(-3px); }
+    .vcard .v-num { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 700; color: var(--gold); line-height: 1; }
+    .vcard .v-title { font-size: .78rem; font-weight: 600; color: rgba(232,201,154,.8); margin: .3rem 0 .25rem; }
+    .vcard .v-desc { font-size: .7rem; color: rgba(232,201,154,.38); line-height: 1.55; }
+
+    /* ─── MARQUEE ─── */
+    .marquee-strip { background: linear-gradient(90deg, var(--soil-mid) 0%, var(--plant-deep) 50%, var(--soil-mid) 100%); padding: 1rem 0; overflow: hidden; position: relative; border-top: 1px solid rgba(200,150,58,.12); border-bottom: 1px solid rgba(200,150,58,.12); }
+    .marquee-strip::before, .marquee-strip::after { content: ''; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2; pointer-events: none; }
+    .marquee-strip::before { left: 0; background: linear-gradient(90deg, var(--soil-mid), transparent); }
+    .marquee-strip::after { right: 0; background: linear-gradient(-90deg, var(--soil-mid), transparent); }
+    .marquee-track { display: flex; gap: 4rem; white-space: nowrap; animation: marquee 36s linear infinite; }
+    .marquee-item { font-size: .68rem; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--soil-pale); display: inline-flex; align-items: center; gap: 1rem; flex-shrink: 0; }
+    .m-dot { width: 5px; height: 5px; background: var(--gold); border-radius: 50%; box-shadow: 0 0 6px var(--gold); }
+    @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+    /* ─── SECTION COMMONS ─── */
+    .sec-label { display: inline-block; font-size: .62rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--plant-mid); margin-bottom: 1rem; }
+    .sec-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3vw, 2.9rem); font-weight: 700; line-height: 1.15; color: var(--soil-deep); }
+    .sec-title em { color: var(--plant-mid); font-style: italic; }
+    .sec-desc { font-size: .97rem; line-height: 1.85; color: var(--muted); max-width: 620px; margin: 1rem auto 0; }
+    .section-header { text-align: center; margin-bottom: 4rem; }
+
+    /* ─── WHAT IS MUMBAI 3.0 ─── */
+    #what {
+      padding: 7rem 7%;
+      background: var(--white); position: relative; overflow: hidden;
+    }
+    #what::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, var(--plant-mid), var(--gold), var(--plant-mid), transparent); }
+
+    .what-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+    .what-text .sec-title { text-align: left; }
+    .what-text .sec-desc { margin: 0; }
+    .what-body {
+      margin-top: 1.6rem;
+      font-size: 1rem; line-height: 1.92; color: var(--muted);
+    }
+    .what-body p { margin-bottom: 1.2rem; }
+    .what-body strong { color: var(--soil-deep); font-weight: 600; }
+    .big-stat-row { display: flex; gap: 2.5rem; margin-top: 2.5rem; flex-wrap: wrap; }
+    .bstat { text-align: left; }
+    .bstat .bn { font-family: 'Cormorant Garamond', serif; font-size: 3.2rem; font-weight: 700; color: var(--plant-deep); line-height: 1; }
+    .bstat .bn span { color: var(--gold); }
+    .bstat .bl { font-size: .68rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 1.5px; margin-top: .35rem; }
+
+    .what-img-block { position: relative; }
+    .what-img-block img { width: 100%; height: 480px; object-fit: cover; border-radius: 20px; box-shadow: 0 24px 80px rgba(14,9,5,.18); }
+    .what-img-badge {
+      position: absolute; bottom: -1.5rem; left: -1.5rem;
+      background: var(--white); border-radius: 14px; padding: 1.2rem 1.6rem;
+      box-shadow: 0 12px 40px rgba(14,9,5,.14);
+      border: 1px solid rgba(107,68,35,.07);
+    }
+    .what-img-badge .wb-num { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 700; color: var(--plant-mid); line-height: 1; }
+    .what-img-badge .wb-lbl { font-size: .7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1.5px; margin-top: .2rem; }
+
+    /* ─── TIMELINE / VERSIONS ─── */
+    #timeline {
+      padding: 7rem 7%;
+      background: var(--soil-deep);
+      position: relative; overflow: hidden;
+    }
+    .tl-bg1 { position: absolute; top: -20%; left: -10%; width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(26,92,36,.12) 0%, transparent 60%); pointer-events: none; }
+    .tl-bg2 { position: absolute; bottom: -15%; right: -5%; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(200,150,58,.07) 0%, transparent 60%); pointer-events: none; }
+    .tl-grid-lines { position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px); background-size: 90px 90px; }
+
+    #timeline .sec-label { color: var(--plant-lime); }
+    #timeline .sec-title { color: var(--soil-pale); text-align: center; }
+    #timeline .sec-title em { color: var(--gold); }
+    #timeline .section-header { position: relative; z-index: 2; }
+
+    .tl-container { position: relative; z-index: 2; max-width: 900px; margin: 0 auto; }
+    .tl-line { position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, transparent, rgba(200,150,58,.3), rgba(200,150,58,.3), transparent); transform: translateX(-50%); }
+
+    .tl-item { display: grid; grid-template-columns: 1fr 60px 1fr; gap: 0; margin-bottom: 4rem; align-items: center; }
+    .tl-item:nth-child(odd) .tl-card { grid-column: 1; text-align: right; padding-right: 2.5rem; }
+    .tl-item:nth-child(odd) .tl-dot-col { grid-column: 2; }
+    .tl-item:nth-child(odd) .tl-spacer { grid-column: 3; }
+    .tl-item:nth-child(even) .tl-spacer { grid-column: 1; }
+    .tl-item:nth-child(even) .tl-dot-col { grid-column: 2; }
+    .tl-item:nth-child(even) .tl-card { grid-column: 3; text-align: left; padding-left: 2.5rem; }
+
+    .tl-dot-col { display: flex; justify-content: center; align-items: center; }
+    .tl-dot {
+      width: 48px; height: 48px; border-radius: 50%;
+      border: 2px solid rgba(200,150,58,.4);
+      background: var(--soil-deep);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; position: relative; z-index: 2;
+      box-shadow: 0 0 0 8px rgba(200,150,58,.06);
+      transition: border-color .3s, box-shadow .3s;
+    }
+    .tl-item:hover .tl-dot { border-color: var(--gold); box-shadow: 0 0 0 12px rgba(200,150,58,.12); }
+
+    .tl-card { padding: 1.8rem 2rem; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); border-radius: 16px; transition: background .3s, border-color .3s, transform .3s; cursor: default; }
+    .tl-item:nth-child(odd) .tl-card { border-radius: 16px 4px 16px 16px; }
+    .tl-item:nth-child(even) .tl-card { border-radius: 4px 16px 16px 16px; }
+    .tl-card:hover { background: rgba(255,255,255,.09); border-color: rgba(200,150,58,.2); }
+    .tl-item:nth-child(odd) .tl-card:hover { transform: translateX(-6px); }
+    .tl-item:nth-child(even) .tl-card:hover { transform: translateX(6px); }
+
+    .tl-era { font-size: .6rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: .5rem; }
+    .tl-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 700; color: rgba(232,201,154,.95); margin-bottom: .6rem; }
+    .tl-card p { font-size: .84rem; line-height: 1.75; color: rgba(232,201,154,.45); }
+
+    /* ─── INFRA CARDS ─── */
+    #infra-detail {
+      padding: 7rem 7%;
+      background: linear-gradient(180deg, var(--soil-cream) 0%, #ede5d4 100%);
+      position: relative;
+    }
+    #infra-detail::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(107,68,35,.2), transparent); }
+
+    .infra-cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    .infra-card {
+      background: var(--white); border-radius: 20px; overflow: hidden;
+      border: 1px solid rgba(107,68,35,.07);
+      box-shadow: 0 4px 24px rgba(14,9,5,.05);
+      transition: transform .35s, box-shadow .35s;
+    }
+    .infra-card:hover { transform: translateY(-8px); box-shadow: 0 24px 64px rgba(14,9,5,.12); }
+    .infra-card-img { position: relative; height: 200px; overflow: hidden; }
+    .infra-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+    .infra-card:hover .infra-card-img img { transform: scale(1.06); }
+    .infra-card-img::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 80px; background: linear-gradient(to top, rgba(14,9,5,.4), transparent); pointer-events: none; }
+
+    .infra-card-tag {
+      position: absolute; top: 1rem; left: 1rem;
+      font-size: .58rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      padding: .28rem .8rem; border-radius: 4px; z-index: 2;
+    }
+    .infra-card-tag.air { background: rgba(26,92,36,.85); color: var(--plant-lime); }
+    .infra-card-tag.road { background: rgba(200,150,58,.85); color: var(--soil-deep); }
+    .infra-card-tag.sea { background: rgba(14,9,5,.75); color: var(--soil-pale); }
+    .infra-card-tag.rail { background: rgba(61,36,16,.85); color: var(--gold-light); }
+    .infra-card-tag.smart { background: rgba(46,125,54,.85); color: var(--white); }
+    .infra-card-tag.metro { background: rgba(107,68,35,.85); color: var(--soil-pale); }
+
+    .ic-body { padding: 1.6rem 1.8rem 2rem; }
+    .ic-icon { font-size: 1.8rem; margin-bottom: .8rem; }
+    .ic-body h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 700; color: var(--soil-deep); margin-bottom: .5rem; }
+    .ic-body p { font-size: .84rem; line-height: 1.75; color: var(--muted); margin-bottom: 1rem; }
+    .ic-stat { display: flex; gap: .6rem; flex-wrap: wrap; }
+    .ic-chip { font-size: .65rem; font-weight: 600; padding: .25rem .7rem; border-radius: 4px; background: rgba(26,92,36,.08); color: var(--plant-mid); border: 1px solid rgba(26,92,36,.12); }
+
+    /* ─── IMAGE BREAK ─── */
+    .img-break {
+      height: 420px; position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .img-break img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .img-break-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(14,9,5,.72) 0%, rgba(13,36,16,.55) 100%); }
+    .img-break-content { position: relative; z-index: 2; text-align: center; padding: 2rem 7%; }
+    .img-break-content .big-quote-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.8rem);
+      font-weight: 700; color: var(--white); line-height: 1.2; max-width: 860px;
+    }
+    .img-break-content .big-quote-text em {
+      font-style: italic;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+    /* ─── LOCATION DEEP DIVES ─── */
+    #locations {
+      padding: 7rem 7%;
+      background: var(--white);
+    }
+    .loc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    .loc-card {
+      border-radius: 20px; overflow: hidden;
+      border: 1px solid rgba(107,68,35,.07);
+      box-shadow: 0 4px 24px rgba(14,9,5,.05);
+      transition: transform .35s, box-shadow .35s;
+      background: var(--soil-cream);
+    }
+    .loc-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(14,9,5,.12); }
+    .loc-card-img { position: relative; height: 230px; overflow: hidden; }
+    .loc-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+    .loc-card:hover .loc-card-img img { transform: scale(1.05); }
+    .loc-card-img::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 100px; background: linear-gradient(to top, rgba(14,9,5,.45), transparent); pointer-events: none; }
+    .loc-badge { position: absolute; bottom: 1rem; left: 1rem; background: rgba(255,255,255,.12); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,.2); color: var(--white); font-size: .7rem; font-weight: 600; padding: .3rem .85rem; border-radius: 5px; z-index: 2; }
+    .loc-body { padding: 1.8rem 2rem 2.2rem; }
+    .loc-body h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 700; color: var(--soil-deep); margin-bottom: .55rem; }
+    .loc-body p { font-size: .88rem; line-height: 1.8; color: var(--muted); margin-bottom: 1.2rem; }
+    .loc-tags { display: flex; gap: .5rem; flex-wrap: wrap; }
+    .loc-tag { font-size: .63rem; font-weight: 600; padding: .28rem .75rem; border-radius: 4px; background: rgba(26,92,36,.08); color: var(--plant-mid); border: 1px solid rgba(26,92,36,.12); letter-spacing: .5px; }
+    .loc-dist { font-size: .75rem; color: var(--muted); margin-top: .9rem; display: flex; align-items: center; gap: .35rem; }
+    .loc-dist strong { color: var(--soil-deep); }
+
+    /* ─── WEALTH CREATION ─── */
+    #wealth {
+      padding: 7rem 7%;
+      background: var(--soil-deep);
+      position: relative; overflow: hidden;
+    }
+    .wc-bg1 { position: absolute; top: -20%; left: -5%; width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(26,92,36,.14) 0%, transparent 60%); pointer-events: none; }
+    .wc-bg2 { position: absolute; bottom: -15%; right: 0%; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(200,150,58,.08) 0%, transparent 60%); pointer-events: none; }
+
+    #wealth .sec-label { color: var(--plant-lime); }
+    #wealth .sec-title { color: var(--soil-pale); }
+    #wealth .sec-title em { color: var(--gold); }
+
+    .wealth-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; position: relative; z-index: 2; margin-top: 1rem; }
+    .wealth-text .sec-title { text-align: left; }
+    .wealth-text .wealth-body { font-size: .97rem; line-height: 1.88; color: rgba(232,201,154,.5); margin-top: 1.4rem; }
+    .wealth-text .wealth-body p { margin-bottom: 1rem; }
+    .wealth-text .wealth-body strong { color: var(--gold); font-weight: 600; }
+
+    .wealth-items { margin-top: 2rem; display: flex; flex-direction: column; gap: .9rem; }
+    .wealth-item {
+      display: flex; align-items: flex-start; gap: 1.2rem;
+      padding: 1.2rem 1.4rem; border-radius: 12px;
+      background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.065);
+      transition: background .3s, border-color .3s, transform .3s;
+    }
+    .wealth-item:hover { background: rgba(255,255,255,.07); border-color: rgba(94,186,98,.2); transform: translateX(6px); }
+    .wi-icon { width: 42px; height: 42px; border-radius: 10px; background: rgba(94,186,98,.1); border: 1px solid rgba(94,186,98,.18); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .wealth-item h4 { font-size: .92rem; font-weight: 600; color: rgba(232,201,154,.9); margin-bottom: .2rem; }
+    .wealth-item p { font-size: .82rem; color: rgba(232,201,154,.42); line-height: 1.6; }
+
+    .stat-boxes { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .sb {
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px; padding: 2rem 1.8rem;
+      transition: background .3s, transform .3s, border-color .3s;
+      position: relative; overflow: hidden;
+    }
+    .sb::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); opacity: 0; transition: opacity .3s; }
+    .sb:hover { background: rgba(255,255,255,.08); transform: translateY(-4px); border-color: rgba(200,150,58,.2); }
+    .sb:hover::after { opacity: 1; }
+    .sb .big { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 700; color: var(--gold); line-height: 1; text-shadow: 0 0 30px rgba(200,150,58,.4); }
+    .sb .sm { font-size: .68rem; font-weight: 500; color: rgba(232,201,154,.42); text-transform: uppercase; letter-spacing: 1.5px; margin-top: .5rem; line-height: 1.55; }
+
+    /* ─── NRI SECTION ─── */
+    #nri {
+      padding: 7rem 7%;
+      background: linear-gradient(180deg, #f7f1e8 0%, var(--soil-cream) 100%);
+    }
+    .nri-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+    .nri-img-block { position: relative; }
+    .nri-img-block img { width: 100%; height: 460px; object-fit: cover; border-radius: 20px; box-shadow: 0 24px 80px rgba(14,9,5,.14); }
+    .nri-img-badge {
+      position: absolute; top: -1.5rem; right: -1.5rem;
+      background: linear-gradient(135deg, var(--plant-mid), var(--plant-fresh));
+      border-radius: 14px; padding: 1.2rem 1.6rem;
+      box-shadow: 0 12px 40px var(--green-glow);
+      color: var(--white); text-align: center;
+    }
+    .nri-img-badge .wb-num { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 700; line-height: 1; }
+    .nri-img-badge .wb-lbl { font-size: .65rem; text-transform: uppercase; letter-spacing: 1.5px; opacity: .75; margin-top: .2rem; }
+
+    .nri-text .sec-title { text-align: left; }
+    .nri-body { margin-top: 1.4rem; font-size: .97rem; line-height: 1.88; color: var(--muted); }
+    .nri-body p { margin-bottom: 1rem; }
+    .nri-body strong { color: var(--soil-deep); }
+    .nri-checklist { margin-top: 1.8rem; display: flex; flex-direction: column; gap: .75rem; }
+    .nri-check { display: flex; align-items: flex-start; gap: .85rem; font-size: .9rem; color: var(--muted); line-height: 1.65; }
+    .nri-check-dot { width: 22px; height: 22px; border-radius: 50%; background: linear-gradient(135deg, var(--plant-mid), var(--plant-fresh)); display: flex; align-items: center; justify-content: center; color: var(--white); font-size: .6rem; flex-shrink: 0; margin-top: .1rem; }
+
+    /* ─── CTA BANNER ─── */
+    #cta-banner {
+      padding: 8rem 7%;
+      background: var(--soil-deep);
+      position: relative; overflow: hidden; text-align: center;
+    }
+    .cta-ambient1 { position: absolute; top: -30%; left: 50%; transform: translateX(-50%); width: 800px; height: 800px; border-radius: 50%; background: radial-gradient(circle, rgba(26,92,36,.12) 0%, transparent 60%); pointer-events: none; }
+    .cta-ambient2 { position: absolute; bottom: -20%; right: 5%; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(200,150,58,.08) 0%, transparent 60%); pointer-events: none; }
+    .cta-grid-lines { position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(rgba(255,255,255,.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.015) 1px, transparent 1px); background-size: 80px 80px; }
+    .cta-inner { position: relative; z-index: 2; max-width: 700px; margin: 0 auto; }
+    .cta-inner .sec-label { color: var(--plant-lime); }
+    .cta-inner h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 3.5vw, 3.2rem); font-weight: 700; color: var(--white); line-height: 1.18; margin: .8rem 0 1.2rem; }
+    .cta-inner h2 em { background: linear-gradient(90deg, var(--gold), var(--gold-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-style: italic; }
+    .cta-inner p { font-size: .97rem; color: rgba(232,201,154,.55); line-height: 1.82; margin-bottom: 2.8rem; }
+    .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-gold-solid { background: linear-gradient(135deg, var(--gold), #E8B050); color: var(--soil-deep); padding: 1rem 2.8rem; border-radius: 7px; font-weight: 700; font-size: .95rem; letter-spacing: .3px; box-shadow: 0 8px 32px rgba(200,150,58,.35); transition: transform .25s, box-shadow .25s; display: inline-flex; align-items: center; gap: .5rem; }
+    .btn-gold-solid:hover { transform: translateY(-3px); box-shadow: 0 16px 48px rgba(200,150,58,.45); }
+    .btn-ghost { border: 1.5px solid rgba(255,255,255,.18); color: rgba(255,255,255,.75); padding: 1rem 2.8rem; border-radius: 7px; font-weight: 500; font-size: .95rem; display: inline-flex; align-items: center; gap: .5rem; backdrop-filter: blur(8px); transition: background .25s, border-color .25s, transform .25s; }
+    .btn-ghost:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.4); transform: translateY(-3px); }
+
+    /* ─── FOOTER ─── */
+    footer { background: linear-gradient(180deg, #0a0603 0%, #060402 100%); padding: 5.5rem 7% 2.5rem; border-top: 1px solid rgba(255,255,255,.05); }
+    .footer-grid { display: grid; grid-template-columns: 2.2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem; }
+    .footer-brand .logo-main { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.7rem; color: var(--soil-pale); }
+    .footer-brand .logo-main span { color: var(--plant-lime); }
+    .footer-sub { font-size: .52rem; letter-spacing: 3.5px; text-transform: uppercase; color: rgba(232,201,154,.25); margin-top: 2px; margin-bottom: 1.4rem; display: block; }
+    .footer-brand p { font-size: .83rem; line-height: 1.8; color: rgba(232,201,154,.38); max-width: 280px; }
+    .footer-social { display: flex; gap: .7rem; margin-top: 1.8rem; }
+    .soc-btn { width: 40px; height: 40px; border-radius: 9px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.09); display: flex; align-items: center; justify-content: center; font-size: .9rem; color: rgba(232,201,154,.4); transition: background .25s, color .25s, border-color .25s, transform .2s; }
+    .soc-btn:hover { background: var(--plant-mid); color: var(--white); border-color: var(--plant-mid); transform: translateY(-2px); }
+    .footer-col h4 { font-size: .65rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: rgba(232,201,154,.6); margin-bottom: 1.5rem; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .7rem; }
+    .footer-col a { font-size: .83rem; color: rgba(232,201,154,.35); transition: color .2s; }
+    .footer-col a:hover { color: var(--plant-lime); }
+    .footer-divider { border: none; border-top: 1px solid rgba(255,255,255,.055); margin-bottom: 2rem; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-bottom p { font-size: .77rem; color: rgba(232,201,154,.22); }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a { font-size: .77rem; color: rgba(232,201,154,.22); transition: color .2s; }
+    .footer-links a:hover { color: var(--plant-lime); }
+
+    /* scroll top */
+    #scrollTop { position: fixed; bottom: 2rem; right: 2rem; z-index: 600; width: 48px; height: 48px; border-radius: 10px; background: linear-gradient(135deg, var(--plant-mid), var(--plant-fresh)); color: var(--white); border: none; cursor: pointer; font-size: 1rem; box-shadow: 0 6px 24px var(--green-glow); display: none; align-items: center; justify-content: center; transition: transform .2s, box-shadow .25s; }
+    #scrollTop:hover { transform: translateY(-3px); box-shadow: 0 12px 36px var(--green-glow); }
+    #scrollTop.visible { display: flex; }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .75s ease, transform .75s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-left { opacity: 0; transform: translateX(-28px); transition: opacity .75s ease, transform .75s ease; }
+    .reveal-left.visible { opacity: 1; transform: none; }
+    .reveal-right { opacity: 0; transform: translateX(28px); transition: opacity .75s ease, transform .75s ease; }
+    .reveal-right.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+
+    /* ─── RESPONSIVE ─── */
+    @media(max-width:1100px) {
+      .what-grid, .wealth-grid, .nri-grid { grid-template-columns: 1fr; gap: 3.5rem; }
+      .infra-cards-grid { grid-template-columns: 1fr 1fr; }
+      .loc-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
+      .what-img-block img { height: 360px; }
+      .what-img-badge { bottom: 1rem; left: 1rem; }
+      .nri-img-badge { top: 1rem; right: 1rem; }
+    }
+    @media(max-width:960px) {
+      nav ul { display: none; flex-direction: column; position: absolute; top: 76px; left: 0; right: 0; background: rgba(247,241,232,.97); padding: 1.5rem 7%; border-bottom: 1px solid rgba(107,68,35,.1); gap: 1.2rem; backdrop-filter: blur(20px); }
+      nav ul.open { display: flex; }
+      .hamburger { display: flex; }
+      .tl-container { padding: 0 1rem; }
+      .tl-item { grid-template-columns: 1fr; gap: 0; }
+      .tl-item:nth-child(odd) .tl-card,
+      .tl-item:nth-child(even) .tl-card { grid-column: 1; text-align: left; padding: 1.6rem 1.8rem; }
+      .tl-item:nth-child(odd) .tl-dot-col,
+      .tl-item:nth-child(even) .tl-dot-col { display: none; }
+      .tl-item:nth-child(odd) .tl-spacer,
+      .tl-item:nth-child(even) .tl-spacer { display: none; }
+      .tl-line { display: none; }
+      .tl-item:nth-child(odd) .tl-card,
+      .tl-item:nth-child(even) .tl-card { border-radius: 14px; }
+      .tl-item:nth-child(odd) .tl-card:hover,
+      .tl-item:nth-child(even) .tl-card:hover { transform: none; }
+      .img-break { height: 300px; }
+      .img-break-content .big-quote-text { font-size: 1.6rem; }
+    }
+    @media(max-width:640px) {
+      .infra-cards-grid { grid-template-columns: 1fr; }
+      .loc-grid { grid-template-columns: 1fr; }
+      .stat-boxes { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .hero-btns { flex-direction: column; }
+      .cta-btns { flex-direction: column; align-items: center; }
+      .version-strip { gap: 1rem; }
+      .vcard { min-width: 140px; }
+      .big-stat-row { gap: 1.5rem; }
+      .nri-img-block img { height: 300px; }
+      .what-img-block img { height: 280px; }
+      .nri-img-badge { top: auto; bottom: -1rem; right: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="logo-wrap">
+    <div class="logo-main">7/12 <span>Waale</span></div>
+    <div class="logo-sub">Plots & Land Experts · Maharashtra</div>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="mumbai.html" class="active">Why Mumbai 3.0</a></li>
+    <li><a href="listings.html">Our Plots</a></li>
+    <li><a href="contact.html" class="btn-nav">Enquire Now</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-img-overlay"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="orb1"></div>
+  <div class="orb2"></div>
+
+  <div class="hero-inner">
+    <div class="eyebrow"><span class="eyebrow-dot"></span>MMRDA's Next Great Urban Region · MMR</div>
+    <h1 class="hero-h1">
+      <span style="display:block;color:rgba(255,255,255,.92);">Welcome to</span>
+      <span class="accent"><span class="hl-mumbai">Mumbai 3.0</span></span>
+      <span style="display:block;color:rgba(255,255,255,.88);font-size:clamp(1.6rem,3vw,3.2rem);font-weight:400;margin-top:.5rem;">Mumbai's Next <span class="hl-growth" style="color:var(--plant-lime);text-shadow:none;">Growth</span> Hub is Already Being Built.</span>
+    </h1>
+    <p class="hero-sub">
+      A planned urban region between Mumbai and Navi Mumbai, spread across the <strong>Uran, Panvel &amp; Pen belt</strong> — covering ~124 villages. Backed by the Government of Maharashtra and <strong>MMRDA</strong>, with <span class="hl-underline">₹20 lakh crore in WEF 2026 investments secured</span>, this is where the next chapter of Mumbai begins.
+    </p>
+    <div class="hero-btns">
+      <a href="listings.html" class="btn-primary">Explore Plots in the Belt &rarr;</a>
+      <a href="contact.html" class="btn-gold-outline">Book a Free Call</a>
+    </div>
+  </div>
+
+  <div class="version-strip">
+    <div class="vcard">
+      <div class="v-num">1.0</div>
+      <div class="v-title">Original Mumbai</div>
+      <div class="v-desc">South Mumbai, Bandra, Andheri. The founding financial &amp; commercial core.</div>
+    </div>
+    <div class="vcard">
+      <div class="v-num">2.0</div>
+      <div class="v-title">Navi Mumbai</div>
+      <div class="v-desc">CIDCO's planned city — how "too far" became a thriving urban hub.</div>
+    </div>
+    <div class="vcard" style="border-color:rgba(200,150,58,.35);background:rgba(200,150,58,.08);">
+      <div class="v-num" style="color:var(--gold-light);">3.0 ✦</div>
+      <div class="v-title" style="color:rgba(232,201,154,.95);">Uran · Panvel · Pen Belt</div>
+      <div class="v-desc" style="color:rgba(232,201,154,.45);">~124 villages. NMIA, Atal Setu &amp; MMRDA-backed corridors. <span style="color:var(--plant-lime);font-weight:600;">Growth</span> starting now.</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-item"><span class="m-dot"></span>NMIA — Navi Mumbai Int'l Airport</span>
+    <span class="marquee-item"><span class="m-dot"></span>Atal Setu — India's Longest Sea Bridge</span>
+    <span class="marquee-item"><span class="m-dot"></span>124 Villages · Uran · Panvel · Pen</span>
+    <span class="marquee-item"><span class="m-dot"></span>WEF 2026: ₹20 Lakh Crore Secured</span>
+    <span class="marquee-item"><span class="m-dot"></span>MMRDA-Backed Urban Development</span>
+    <span class="marquee-item"><span class="m-dot"></span>Govt of Maharashtra Planned Region</span>
+    <span class="marquee-item"><span class="m-dot"></span>24 MoUs in 3 Days at Davos</span>
+    <span class="marquee-item"><span class="m-dot"></span>NMIA — Navi Mumbai Int'l Airport</span>
+    <span class="marquee-item"><span class="m-dot"></span>Atal Setu — India's Longest Sea Bridge</span>
+    <span class="marquee-item"><span class="m-dot"></span>124 Villages · Uran · Panvel · Pen</span>
+    <span class="marquee-item"><span class="m-dot"></span>WEF 2026: ₹20 Lakh Crore Secured</span>
+    <span class="marquee-item"><span class="m-dot"></span>MMRDA-Backed Urban Development</span>
+    <span class="marquee-item"><span class="m-dot"></span>Govt of Maharashtra Planned Region</span>
+    <span class="marquee-item"><span class="m-dot"></span>24 MoUs in 3 Days at Davos</span>
+  </div>
+</div>
+
+<!-- WHAT IS MUMBAI 3.0 -->
+<section id="what">
+  <div class="what-grid">
+    <div class="what-text reveal-left">
+      <span class="sec-label">The Big Picture</span>
+      <h2 class="sec-title">What Is <em><span class="hl-mumbai" style="-webkit-text-fill-color:initial;background:none;color:var(--plant-mid);">Mumbai 3.0?</span></em></h2>
+      <div class="what-body">
+        <p><span class="hl-mumbai" style="-webkit-text-fill-color:initial;background:none;color:var(--soil-deep);font-weight:700;">Mumbai 3.0</span> is an upcoming planned urban region in the <strong>Mumbai Metropolitan Region (MMR)</strong>, being developed under the Government of Maharashtra and <strong>MMRDA</strong>. It is strategically located between Mumbai and Navi Mumbai, spread mainly across the <span class="hl-underline">Uran, Panvel, and Pen belt</span>, covering approximately <strong>124 villages.</strong></p>
+        <p>With major infrastructure projects like the <strong>Navi Mumbai International Airport (NMIA)</strong>, the <strong>Atal Setu</strong> sea bridge, and upcoming connectivity corridors, this region is set to become the <span class="hl-growth">next growth hub</span> of the MMR — the way Navi Mumbai once evolved from planned concept to thriving city.</p>
+        <p><span class="hl-mumbai" style="-webkit-text-fill-color:initial;background:none;color:var(--soil-deep);font-weight:700;">Mumbai 3.0</span> represents the <span class="hl-underline">future expansion of Mumbai</span> — offering better planning, improved connectivity, and strong investment potential. At <strong>7/12 Waale</strong>, we offer premium, investment-friendly plots right inside this belt, helping you build a <span class="hl-underline">secure and growing real estate portfolio.</span></p>
+      </div>
+      <div class="big-stat-row">
+        <div class="bstat"><div class="bn">124<span>+</span></div><div class="bl">Villages Covered</div></div>
+        <div class="bstat"><div class="bn">₹20L<span>cr</span></div><div class="bl">WEF 2026 Investments</div></div>
+        <div class="bstat"><div class="bn">24</div><div class="bl">MoUs in 3 Days</div></div>
+      </div>
+    </div>
+    <div class="what-img-block reveal-right">
+      <img src="https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=900&q=80" alt="Mumbai skyline and development"/>
+      <div class="what-img-badge">
+        <div class="wb-num">2025</div>
+        <div class="wb-lbl">The Inflection Point</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section id="timeline">
+  <div class="tl-bg1"></div>
+  <div class="tl-bg2"></div>
+  <div class="tl-grid-lines"></div>
+  <div class="section-header">
+    <span class="sec-label">The Global Validation</span>
+    <h2 class="sec-title">WEF Davos 2026 — <em>₹20 Lakh Crore</em> Said It All</h2>
+    <p class="sec-desc" style="color:rgba(232,201,154,.5);margin-top:1rem;">At the World Economic Forum in Davos, <strong style="color:var(--gold);">MMRDA</strong> secured <span style="color:var(--gold);font-weight:600;">$226 billion</span> in investments through 24 MoUs in just 3 days — with <span class="hl-mumbai" style="-webkit-text-fill-color:initial;background:none;color:var(--gold-light);font-weight:700;">Mumbai 3.0</span> as a key highlight. The world's largest investors took notice.</p>
+  </div>
+  <div class="tl-container">
+    <div class="tl-line"></div>
+
+    <div class="tl-item reveal">
+      <div class="tl-card">
+        <div class="tl-era">The Original City</div>
+        <h3>Mumbai 1.0 — South Mumbai &amp; Western Suburbs</h3>
+        <p>Nariman Point, Colaba, Bandra, Andheri — the classic Mumbai story. The founding financial and commercial core of the city. Those who owned land here before the boom saw <span class="hl-underline" style="text-decoration-color:var(--gold);">generational wealth creation.</span></p>
+      </div>
+      <div class="tl-dot-col"><div class="tl-dot">🏙️</div></div>
+      <div class="tl-spacer"></div>
+    </div>
+
+    <div class="tl-item reveal reveal-delay-1">
+      <div class="tl-spacer"></div>
+      <div class="tl-dot-col"><div class="tl-dot">🏗️</div></div>
+      <div class="tl-card">
+        <div class="tl-era">The Planned Expansion</div>
+        <h3>Mumbai 2.0 — Navi Mumbai</h3>
+        <p>CIDCO's answer to Mumbai's overflow. Kharghar, Vashi, Belapur — once dismissed as "too far", now thriving urban centres. <span class="hl-growth" style="text-shadow:none;color:var(--plant-lime);">Growth</span> of 8–10× for those who entered early. Navi Mumbai proved that <span class="hl-underline" style="text-decoration-color:var(--gold);">planned government-backed development works.</span></p>
+      </div>
+    </div>
+
+    <div class="tl-item reveal reveal-delay-2">
+      <div class="tl-card" style="border-color:rgba(200,150,58,.25);background:rgba(200,150,58,.07);">
+        <div class="tl-era" style="color:var(--gold-light);">Now — The Next Chapter</div>
+        <h3 style="color:var(--gold-light);">
+          <span style="color:var(--gold-light);font-weight:700;">Mumbai 3.0</span> — Uran · Panvel · Pen Belt
+        </h3>
+        <p style="color:rgba(232,201,154,.55);">~124 villages between Mumbai and Navi Mumbai, being developed under the Government of Maharashtra and <strong style="color:var(--gold);">MMRDA</strong>. NMIA is operational. Atal Setu is open. The corridors are being planned. <strong style="color:var(--gold);">This is the Navi Mumbai moment — happening right now, while land is still affordable.</strong></p>
+      </div>
+      <div class="tl-dot-col"><div class="tl-dot" style="border-color:var(--gold);box-shadow:0 0 0 10px rgba(200,150,58,.15);">✦</div></div>
+      <div class="tl-spacer"></div>
+    </div>
+  </div>
+</section>
+
+<!-- IMAGE BREAK 1 -->
+<div class="img-break">
+  <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1800&q=70" alt="Infrastructure development"/>
+  <div class="img-break-overlay"></div>
+  <div class="img-break-content">
+    <div class="big-quote-text reveal">
+      "The land that surrounds <em>great infrastructure</em> always becomes <em>great wealth.</em>"
+      <div style="font-family:'Outfit',sans-serif;font-size:.75rem;letter-spacing:3px;text-transform:uppercase;color:rgba(232,201,154,.45);margin-top:1.5rem;font-weight:500;">The 7/12 Waale Investment Thesis</div>
+    </div>
+  </div>
+</div>
+
+<!-- INFRASTRUCTURE DEEP DIVE -->
+<section id="infra-detail">
+  <div class="section-header">
+    <span class="sec-label">The Infrastructure Thesis</span>
+    <h2 class="sec-title">The Projects Driving <em>Mumbai 3.0's Growth</em></h2>
+    <p class="sec-desc">Massive infrastructure development is transforming this region — boosting <span class="hl-growth">accessibility</span>, land value, and long-term investment potential.</p>
+  </div>
+  <div class="infra-cards-grid">
+
+    <div class="infra-card reveal">
+      <div class="infra-card-img">
+        <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=600&q=75" alt="Airport"/>
+        <span class="infra-card-tag air">Aviation</span>
+      </div>
+      <div class="ic-body">
+        <div class="ic-icon">✈️</div>
+        <h3>NMIA — Navi Mumbai Int'l Airport</h3>
+        <p>One of the most significant catalysts for <span class="hl-growth">growth</span> in the entire region. <span class="hl-underline">Phase 1 operational</span>, designed for 60 million passengers annually at full capacity. Panvel and Uran are the direct beneficiaries, with land values responding immediately to every construction milestone.</p>
+        <div class="ic-stat">
+          <span class="ic-chip">60M pax capacity</span>
+          <span class="ic-chip">Panvel–Uran belt</span>
+          <span class="ic-chip">Phase 1 live</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="infra-card reveal reveal-delay-1">
+      <div class="infra-card-img">
+        <img src="https://images.unsplash.com/photo-1543674892-7d64d45df18b?w=600&q=75" alt="Sea bridge"/>
+        <span class="infra-card-tag sea">Connectivity</span>
+      </div>
+      <div class="ic-body">
+        <div class="ic-icon">🌉</div>
+        <h3>Atal Setu — India's Longest Sea Bridge</h3>
+        <p>The 21.8 km Atal Setu (formerly MTHL) has <span class="hl-underline">permanently collapsed travel time</span> from South Mumbai to Navi Mumbai to under 20 minutes. Distance is no longer a barrier — and when distance shrinks, land values <span class="hl-growth">grow</span>. The bridge has already redrawn the commuter map.</p>
+        <div class="ic-stat">
+          <span class="ic-chip">21.8 km</span>
+          <span class="ic-chip">&lt;20 min S. Mumbai</span>
+          <span class="ic-chip">Operational</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="infra-card reveal reveal-delay-2">
+      <div class="infra-card-img">
+        <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=600&q=75" alt="Highway corridor"/>
+        <span class="infra-card-tag road">Connectivity</span>
+      </div>
+      <div class="ic-body">
+        <div class="ic-icon">🛣️</div>
+        <h3>Upcoming Connectivity Corridors</h3>
+        <p>Mumbai 3.0 enjoys <span class="hl-underline">excellent connectivity</span> to Mumbai, Navi Mumbai, and Pune through expressways and upcoming transport networks. The planned multimodal corridors will make this region ideal for both residential and commercial <span class="hl-growth">growth</span> — replicating the Western Express Highway effect for the eastern corridor.</p>
+        <div class="ic-stat">
+          <span class="ic-chip">Mumbai access</span>
+          <span class="ic-chip">Pune Expressway</span>
+          <span class="ic-chip">Multimodal</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="infra-card reveal">
+      <div class="infra-card-img">
+        <img src="https://images.unsplash.com/photo-1555963966-b7ae5404b6ed?w=600&q=75" alt="Metro train"/>
+        <span class="infra-card-tag metro">Metro</span>
+      </div>
+      <div class="ic-body">
+        <div class="ic-icon">🚇</div>
+        <h3>Metro Connectivity</h3>
+        <p>MMRDA's metro network extensions are bringing <span class="hl-underline">rail-based mass transit</span> into pockets of the Mumbai 3.0 belt for the first time. Metro access historically drives <span class="hl-growth">growth</span> of 25–40% in land values within a 1 km radius of stations — a pattern we are watching closely for our plot selections.</p>
+        <div class="ic-stat">
+          <span class="ic-chip">MMRDA-led</span>
+          <span class="ic-chip">Panvel belt</span>
+          <span class="ic-chip">Planned</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="infra-card reveal reveal-delay-1">
+      <div class="infra-card-img">
+        <img src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=600&q=75" alt="Smart city planning"/>
+        <span class="infra-card-tag smart">Urban Planning</span>
+      </div>
+      <div class="ic-body">
+        <div class="ic-icon">🏙️</div>
+        <h3>Modern Planned Development</h3>
+        <p>Unlike older cities, <span class="hl-mumbai" style="-webkit-text-fill-color:initial;background:none;color:var(--plant-mid);font-weight:700;">Mumbai 3.0</span> is being developed with <span class="hl-underline">modern urban planning</span> from the ground up — wider roads, better zoning, and organised layouts. This ensures sustainable, structured <span class="hl-growth">growth</span> and avoids the haphazard sprawl that burdened older Mumbai suburbs.</p>
+        <div class="ic-stat">
+          <span class="ic-chip">Zoned development</span>
+          <span class="ic-chip">Wider roads</span>
+          <span class="ic-chip">MMRDA planned</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="infra-card reveal reveal-delay-2">
+      <div class="infra-card-img">
+        <img src="https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=600&q=75" alt="Investment opportunity"/>
+        <span class="infra-card-tag road">Investment</span>
+      </div>
+      <div class="ic-body">
+        <div class="ic-icon">📈</div>
+        <h3>Affordable Entry — While It Lasts</h3>
+        <p>Compared to saturated urban areas, land prices in <span class="hl-mumbai" style="-webkit-text-fill-color:initial;background:none;color:var(--plant-mid);font-weight:700;">Mumbai 3.0</span> are still <span class="hl-underline">relatively affordable</span>. This gives investors the rare chance to enter early and benefit from long-term appreciation — the same opportunity that existed in Kharghar in 2000. <span class="hl-growth">Windows like this don't stay open.</span></p>
+        <div class="ic-stat">
+          <span class="ic-chip">Early entry</span>
+          <span class="ic-chip">High upside</span>
+          <span class="ic-chip">Govt backed</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- IMAGE BREAK 2 -->
+<div class="img-break">
+  <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1800&q=70" alt="Land and opportunity"/>
+  <div class="img-break-overlay" style="background:linear-gradient(135deg,rgba(13,36,16,.75) 0%,rgba(61,36,16,.55) 100%);"></div>
+  <div class="img-break-content">
+    <div class="big-quote-text reveal">
+      Every major city expands along its <em>infrastructure spine</em>.<br>Mumbai's spine is now pointing <em>south and east.</em>
+    </div>
+  </div>
+</div>
+
+<!-- LOCATIONS -->
+<section id="locations">
+  <div class="section-header">
+    <span class="sec-label">Our Key Locations</span>
+    <h2 class="sec-title">Where We Invest — <em>And Why</em></h2>
+    <p class="sec-desc">Each pocket in the <span class="hl-mumbai" style="-webkit-text-fill-color:initial;background:none;color:var(--plant-mid);font-weight:700;">Mumbai 3.0</span> belt has a distinct <span class="hl-growth">growth</span> driver. We track all of them — so you invest in the right one for your goals.</p>
+  </div>
+  <div class="loc-grid">
+
+    <div class="loc-card reveal">
+      <div class="loc-card-img">
+        <img src="https://images.unsplash.com/photo-1531913764164-f85c52e6e654?w=700&q=75" alt="Panvel"/>
+        <span class="loc-badge">📍 Panvel, Raigad</span>
+      </div>
+      <div class="loc-body">
+        <h3>Panvel — The New Gateway</h3>
+        <p>The most direct beneficiary of both NMIA and MTHL. <span class="hl-underline">NA plots and residential layouts</span> here are seeing institutional buyers quietly accumulate. Panvel is becoming the <span class="hl-growth">growth</span> pivot of Raigad — with a rapidly expanding social infrastructure of malls, schools, and hospitals.</p>
+        <div class="loc-tags"><span class="loc-tag">NA Plots</span><span class="loc-tag">NMIA Belt</span><span class="loc-tag">MTHL Access</span></div>
+        <div class="loc-dist">🚗 Distance from CSMT: <strong>&nbsp;~50 km via MTHL</strong></div>
+      </div>
+    </div>
+
+    <div class="loc-card reveal reveal-delay-1">
+      <div class="loc-card-img">
+        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=700&q=75" alt="Pen"/>
+        <span class="loc-badge">📍 Pen, Raigad</span>
+      </div>
+      <div class="loc-body">
+        <h3>Pen — The Quiet Compounder</h3>
+        <p>Pen sits squarely on the <span class="hl-underline">VAMC alignment</span> — the corridor that will unlock this town's latent value. Currently still priced as a tier-3 town, Pen offers the highest upside risk–reward in the belt. Agricultural land here is <span class="hl-growth">growing</span> in demand from HNI investors building long-term positions.</p>
+        <div class="loc-tags"><span class="loc-tag">Agricultural Land</span><span class="loc-tag">VAMC Corridor</span><span class="loc-tag">Highest Upside</span></div>
+        <div class="loc-dist">🚗 Distance from Panvel: <strong>&nbsp;~28 km</strong></div>
+      </div>
+    </div>
+
+    <div class="loc-card reveal reveal-delay-2">
+      <div class="loc-card-img">
+        <img src="https://images.unsplash.com/photo-1439405326-bda3e1d44b44?w=700&q=75" alt="Alibaug coast"/>
+        <span class="loc-badge">📍 Alibaug, Raigad</span>
+      </div>
+      <div class="loc-body">
+        <h3>Alibaug — The Coastal Premium</h3>
+        <p>The Ro-Ro ferry has permanently changed Alibaug's demand curve. Once a weekend escape, it's now an <span class="hl-underline">emerging residential destination</span> for South Mumbai's upper-middle class. Farmhouses, coastal NA plots, and resort developments are all seeing <span class="hl-growth">accelerating</span> demand — especially post-COVID lifestyle shifts.</p>
+        <div class="loc-tags"><span class="loc-tag">Coastal NA Plots</span><span class="loc-tag">Farm Plots</span><span class="loc-tag">Lifestyle Demand</span></div>
+        <div class="loc-dist">🚢 Ferry from Gateway of India: <strong>&nbsp;~60 min</strong></div>
+      </div>
+    </div>
+
+    <div class="loc-card reveal">
+      <div class="loc-card-img">
+        <img src="https://images.unsplash.com/photo-1448630360428-65456885c650?w=700&q=75" alt="Khopoli hills"/>
+        <span class="loc-badge">📍 Khopoli, Raigad</span>
+      </div>
+      <div class="loc-body">
+        <h3>Khopoli — Industrial &amp; Investment Belt</h3>
+        <p>Sitting on the Pune–Mumbai Expressway and adjacent to <span class="hl-underline">MIDC industrial zones</span>, Khopoli attracts both industrial and residential buyers. The VAMC corridor adds a new dimension to its already-strong <span class="hl-growth">growth</span> thesis. Corner plots and open plots near expressway nodes are in active demand.</p>
+        <div class="loc-tags"><span class="loc-tag">Open Plots</span><span class="loc-tag">MIDC Adjacent</span><span class="loc-tag">Expressway Belt</span></div>
+        <div class="loc-dist">🚗 Distance from Mumbai: <strong>&nbsp;~80 km via Expressway</strong></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WEALTH CREATION -->
+<section id="wealth">
+  <div class="wc-bg1"></div>
+  <div class="wc-bg2"></div>
+  <div class="wealth-grid">
+    <div class="wealth-text reveal-left">
+      <span class="sec-label" style="color:var(--plant-lime);">Why Invest Here</span>
+      <h2 class="sec-title" style="text-align:left;color:var(--soil-pale);">Why Choose <em>Mumbai 3.0</em><br>for Land Investment</h2>
+      <div class="wealth-body">
+        <p>With <strong>government-backed planning</strong> and increasing demand, land values in <span style="color:var(--gold);font-weight:700;">Mumbai 3.0</span> are expected to rise significantly in the coming years. Whether you're a first-time buyer or a seasoned investor, this region offers <span class="hl-underline" style="text-decoration-color:var(--gold);">flexibility for every investment goal.</span></p>
+      </div>
+      <div class="wealth-items">
+        <div class="wealth-item">
+          <div class="wi-icon">🚀</div>
+          <div><h4>Next Big <span class="hl-growth" style="text-shadow:none;color:var(--plant-lime);">Growth</span> Corridor</h4><p>Set to become the next major hub, similar to how Navi Mumbai evolved from planned concept to thriving city.</p></div>
+        </div>
+        <div class="wealth-item">
+          <div class="wi-icon">🏗️</div>
+          <div><h4>Massive Infrastructure Development</h4><p>NMIA, improved highways, and metro connectivity are <span class="hl-underline" style="text-decoration-color:var(--gold);">already boosting accessibility</span> and land value.</p></div>
+        </div>
+        <div class="wealth-item">
+          <div class="wi-icon">🔗</div>
+          <div><h4>Strategic Connectivity</h4><p>Excellent access to Mumbai, Navi Mumbai, and Pune via expressways and upcoming transport networks.</p></div>
+        </div>
+        <div class="wealth-item">
+          <div class="wi-icon">💰</div>
+          <div><h4>Affordable Entry Point</h4><p>Still relatively affordable vs. saturated urban areas — a rare <span class="hl-underline" style="text-decoration-color:var(--gold);">early-entry window</span> for long-term appreciation.</p></div>
+        </div>
+        <div class="wealth-item">
+          <div class="wi-icon">📐</div>
+          <div><h4>Planned Urban Development</h4><p>Wider roads, better zoning, and organised layouts ensure sustainable, structured <span class="hl-growth" style="text-shadow:none;color:var(--plant-lime);">growth</span> — not chaotic sprawl.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="stat-boxes reveal-right">
+      <div class="sb">
+        <div class="big">₹20L<span style="font-size:1.5rem;">cr</span></div>
+        <div class="sm">WEF 2026 Investments Secured by MMRDA</div>
+      </div>
+      <div class="sb">
+        <div class="big">24</div>
+        <div class="sm">MoUs Signed in First 3 Days at Davos</div>
+      </div>
+      <div class="sb">
+        <div class="big">124</div>
+        <div class="sm">Villages Covered in the Mumbai 3.0 Belt</div>
+      </div>
+      <div class="sb">
+        <div class="big">100%</div>
+        <div class="sm">Clear 7/12-Verified Titles in Our Portfolio</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NRI SECTION -->
+<section id="nri">
+  <div class="nri-grid">
+    <div class="nri-img-block reveal-left">
+      <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=900&q=80" alt="NRI remote investment"/>
+      <div class="nri-img-badge">
+        <div class="wb-num">NRI</div>
+        <div class="wb-lbl">Fully Remote</div>
+      </div>
+    </div>
+    <div class="nri-text reveal-right">
+      <span class="sec-label">For NRI Investors</span>
+      <h2 class="sec-title">Invest in <em>India's Best Land Story</em> — From Anywhere</h2>
+      <div class="nri-body">
+        <p>The <span class="hl-mumbai" style="-webkit-text-fill-color:initial;background:none;color:var(--plant-mid);font-weight:700;">Mumbai 3.0</span> opportunity is attracting a significant wave of <strong>NRI capital</strong> — from the UAE, UK, US, and Singapore. Maharashtra law permits NRIs to purchase agricultural and NA plots with straightforward RBI and FEMA compliance, and 7/12 Waale manages the entire process remotely.</p>
+        <p>Our NRI clients receive <span class="hl-underline">digital copies of all 7/12 extracts</span>, video-recorded site visits, legal opinion letters, and full support through the sub-registrar process — without needing to board a single flight until handover.</p>
+      </div>
+      <div class="nri-checklist">
+        <div class="nri-check"><div class="nri-check-dot">✓</div><span><strong>FEMA &amp; RBI Compliance</strong> — all documentation handled by our legal team.</span></div>
+        <div class="nri-check"><div class="nri-check-dot">✓</div><span><strong>Remote 7/12 Verification</strong> — digital records and legal opinions delivered to your inbox.</span></div>
+        <div class="nri-check"><div class="nri-check-dot">✓</div><span><strong>Video Site Visits</strong> — live-streamed or recorded walkthroughs of every shortlisted plot.</span></div>
+        <div class="nri-check"><div class="nri-check-dot">✓</div><span><strong>Power of Attorney Support</strong> — for buyers who cannot be present at registration.</span></div>
+        <div class="nri-check"><div class="nri-check-dot">✓</div><span><strong>Post-Purchase Mutation</strong> — we follow through until your name is on the revenue record.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section id="cta-banner">
+  <div class="cta-ambient1"></div>
+  <div class="cta-ambient2"></div>
+  <div class="cta-grid-lines"></div>
+  <div class="cta-inner reveal">
+    <span class="sec-label">Get Started Today</span>
+    <h2>Your Plots Inside <em>Mumbai 3.0</em> Are Waiting.</h2>
+    <p>The planned urban region between Mumbai and Navi Mumbai is being built right now — and so is your opportunity. Talk to our team for a free 7/12 consultation and find the right plot in the <span style="color:var(--gold);font-weight:600;">Mumbai 3.0</span> belt for your goals.</p>
+    <div class="cta-btns">
+      <a href="contact.html" class="btn-gold-solid">Book a Free Consultation &rarr;</a>
+      <a href="listings.html" class="btn-ghost">Browse All Plots</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo-main">7/12 <span>Waale</span></div>
+      <span class="footer-sub">Plots & Land Experts · Maharashtra</span>
+      <p>We simplify land and plot ownership across Maharashtra — clear 7/12 records, verified titles, and trusted guidance from search to registration.</p>
+      <div class="footer-social">
+        <a href="#" class="soc-btn" aria-label="WhatsApp">💬</a>
+        <a href="#" class="soc-btn" aria-label="Instagram">📸</a>
+        <a href="#" class="soc-btn" aria-label="Facebook">📘</a>
+        <a href="#" class="soc-btn" aria-label="YouTube">▶️</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="mumbai.html">Why Mumbai 3.0</a></li>
+        <li><a href="listings.html">Our Plots</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Locations</h4>
+      <ul>
+        <li><a href="listings.html">Panvel</a></li>
+        <li><a href="listings.html">Pen</a></li>
+        <li><a href="listings.html">Alibaug</a></li>
+        <li><a href="listings.html">Khopoli</a></li>
+        <li><a href="listings.html">Uran</a></li>
+        <li><a href="listings.html">Karjat</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Plot Types</h4>
+      <ul>
+        <li><a href="listings.html">NA Residential</a></li>
+        <li><a href="listings.html">Agricultural Land</a></li>
+        <li><a href="listings.html">NA Industrial</a></li>
+        <li><a href="listings.html">Open Plots</a></li>
+        <li><a href="listings.html">Farm Plots</a></li>
+        <li><a href="listings.html">Investment Plots</a></li>
+      </ul>
+    </div>
+  </div>
+  <hr class="footer-divider"/>
+  <div class="footer-bottom">
+    <p>© 2025 7/12 Waale. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Use</a>
+      <a href="#">Disclaimer</a>
+    </div>
+  </div>
+</footer>
+
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Scroll to top">↑</button>
+
+<script>
+  const nav = document.getElementById('navbar');
+  const scrollBtn = document.getElementById('scrollTop');
+
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+    scrollBtn.classList.toggle('visible', window.scrollY > 500);
+  });
+
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+    document.getElementById('hamburger').classList.toggle('open');
+  }
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.10 });
+
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

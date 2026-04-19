@@ -110,7 +110,6 @@
       background: #0a0603;
     }
 
-    /* VIDEO BACKGROUND */
     .hero-video-bg {
       position: absolute;
       inset: 0;
@@ -125,7 +124,6 @@
       opacity: 0.45;
     }
 
-    /* Overlay on top of video — graph lines removed */
     .hero-bg {
       position: absolute; inset: 0;
       background:
@@ -152,8 +150,6 @@
     }
     @keyframes float1 { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(30px,-20px) scale(1.05);} }
     @keyframes float2 { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(-20px,25px) scale(1.08);} }
-
-    /* REMOVED .hero-grid-lines — graph lines are gone */
 
     .hero-left {
       position: relative; z-index: 2;
@@ -351,11 +347,11 @@
       font-size: 1.12rem; font-weight: 700; color: var(--soil-deep); margin-bottom: .4rem;
     }
     .pc-loc { font-size: .76rem; color: var(--muted); margin-bottom: 1.1rem; display: flex; align-items: center; gap: .3rem; }
-    .pc-row { 
-      display: flex; 
-      justify-content: space-between; 
-      align-items: baseline; 
-      padding-top: 1rem; 
+    .pc-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding-top: 1rem;
       border-top: 1px solid rgba(107,68,35,.08);
       flex-wrap: wrap;
       gap: 0.5rem;
@@ -364,23 +360,115 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.4rem; font-weight: 700; color: var(--plant-deep);
     }
-    .pc-area { 
-      font-size: .75rem; 
-      color: var(--muted); 
-      font-weight: 500; 
+    .pc-area {
+      font-size: .75rem;
+      color: var(--muted);
+      font-weight: 500;
       text-align: right;
       line-height: 1.4;
     }
-    /* Ensure consistent alignment across cards */
     @media(max-width: 480px) {
-      .pc-row {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .pc-area {
-        text-align: left;
-      }
+      .pc-row { flex-direction: column; align-items: flex-start; }
+      .pc-area { text-align: left; }
     }
+
+    /* ===== PRICES BY PHASES SECTION ===== */
+    #prices-by-phases {
+      padding: 7rem 7%;
+      background: var(--soil-deep);
+      position: relative;
+      overflow: hidden;
+    }
+    #prices-by-phases::before {
+      content: '';
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+      background-size: 90px 90px;
+    }
+    .phases-ambient1 {
+      position: absolute; top: -20%; right: -5%;
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,150,58,.09) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .phases-ambient2 {
+      position: absolute; bottom: -15%; left: -5%;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(26,92,36,.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .phases-inner {
+      position: relative; z-index: 2;
+    }
+    .phases-header { margin-bottom: 3rem; }
+    .phases-header .sec-label { color: var(--plant-lime); }
+    .phases-header h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3vw, 2.9rem); font-weight: 700; line-height: 1.15;
+      color: var(--soil-pale); text-align: left;
+    }
+    .phases-header h2 em { color: var(--gold); font-style: italic; }
+    .phases-header p {
+      font-size: .95rem; line-height: 1.85;
+      color: rgba(232,201,154,.5);
+      max-width: 560px; margin: .8rem 0 0;
+    }
+
+    .phases-img-wrap {
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(200,150,58,.2);
+      box-shadow:
+        0 0 0 1px rgba(200,150,58,.08),
+        0 24px 80px rgba(0,0,0,.45),
+        0 0 60px rgba(200,150,58,.06);
+      background: rgba(255,255,255,.03);
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .phases-img-wrap::before {
+      content: '';
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      border-radius: 18px;
+      box-shadow: inset 0 0 40px rgba(200,150,58,.04);
+    }
+    .phases-img-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 18px;
+    }
+
+    .phases-note {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      margin-top: 1.5rem;
+      padding: .9rem 1.2rem;
+      background: rgba(200,150,58,.07);
+      border: 1px solid rgba(200,150,58,.18);
+      border-radius: 10px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .phases-note-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 8px var(--gold);
+      flex-shrink: 0;
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+    .phases-note p {
+      font-size: .78rem;
+      color: rgba(232,201,154,.55);
+      line-height: 1.6;
+    }
+    .phases-note strong { color: rgba(232,201,154,.85); font-weight: 600; }
 
     /* CTA BANNER */
     #cta-banner {
@@ -453,16 +541,6 @@
     .footer-sub { font-size: .52rem; letter-spacing: 3.5px; text-transform: uppercase; color: rgba(232,201,154,.25); margin-top: 2px; margin-bottom: 1.4rem; display: block; }
     .footer-brand p { font-size: .83rem; line-height: 1.8; color: rgba(232,201,154,.38); max-width: 280px; }
 
-    .footer-social { display: flex; gap: .7rem; margin-top: 1.8rem; }
-    .soc-btn {
-      width: 40px; height: 40px; border-radius: 9px;
-      background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.09);
-      display: flex; align-items: center; justify-content: center;
-      font-size: .9rem; color: rgba(232,201,154,.4);
-      transition: background .25s, color .25s, border-color .25s, transform .2s;
-    }
-    .soc-btn:hover { background: var(--plant-mid); color: var(--white); border-color: var(--plant-mid); transform: translateY(-2px); }
-
     .footer-col h4 { font-size: .65rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: rgba(232,201,154,.6); margin-bottom: 1.5rem; }
     .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .7rem; }
     .footer-col a { font-size: .83rem; color: rgba(232,201,154,.35); transition: color .2s; }
@@ -501,7 +579,6 @@
 
     /* RESPONSIVE */
     @media(max-width:1200px) {
-      .infra-grid { grid-template-columns: 1fr; gap: 4rem; }
       .footer-grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
     }
     @media(max-width:960px) {
@@ -521,15 +598,19 @@
       }
       .nav-links.open { display: flex; }
       .hamburger { display: flex; }
+      #prices-by-phases { padding: 5rem 5%; }
     }
     @media(max-width:640px) {
       .hero-metrics { gap: 1.5rem; flex-wrap: wrap; }
       .plots-grid { grid-template-columns: 1fr; }
-      .infra-grid { gap: 3rem; }
       .stat-grid { grid-template-columns: 1fr 1fr; }
       .footer-grid { grid-template-columns: 1fr; }
       .hero-btns { flex-direction: column; }
       .cta-btns { flex-direction: column; align-items: center; }
+      #prices-by-phases { padding: 4rem 4%; }
+      .phases-img-wrap { border-radius: 12px; }
+      .phases-img-wrap img { border-radius: 12px; }
+      .phases-note { margin-top: 1.2rem; padding: .75rem 1rem; }
     }
   </style>
 </head>
@@ -556,7 +637,6 @@
 
 <!-- HERO -->
 <section id="home">
-
   <div class="hero-video-bg">
     <video autoplay muted loop playsinline preload="auto">
       <source src="https://raw.githubusercontent.com/qwuitty-prog/7-12-Waale/main/assets/hero_video1.mp4" type="video/mp4">
@@ -611,7 +691,7 @@
   </div>
 </div>
 
-<!-- FEATURED PLOTS (All three cards now have uniform alignment) -->
+<!-- FEATURED PLOTS -->
 <section id="plots-preview">
   <div class="plots-header">
     <div>
@@ -655,7 +735,6 @@
         <div class="pc-loc">📍Contact For More Details </div>
         <div class="pc-row">
           <div class="pc-price">₹ 1.5 L / Guntha</div>
-          <!-- Fixed alignment: moved ₹40 L/Acre into a separate span within pc-area, but kept consistent with other cards -->
           <div class="pc-area">1,089 Sq Ft · ₹40 L/Acre</div>
         </div>
       </div>
@@ -663,7 +742,7 @@
   </div>
 </section>
 
-<!-- PLOTS CONNECTIVITY (unchanged) -->
+<!-- PLOTS CONNECTIVITY -->
 <section id="connectivity" style="padding: 7rem 7%; background: var(--soil-deep); position: relative; overflow: hidden;">
   <div style="position:absolute;top:-20%;left:-10%;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(26,92,36,.15) 0%,transparent 60%);pointer-events:none;"></div>
   <div style="position:absolute;bottom:-15%;right:-5%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(200,150,58,.08) 0%,transparent 60%);pointer-events:none;"></div>
@@ -919,6 +998,33 @@
 })();
 </script>
 
+<!-- ===== PRICES BY PHASES ===== -->
+<section id="prices-by-phases">
+  <div class="phases-ambient1"></div>
+  <div class="phases-ambient2"></div>
+
+  <div class="phases-inner">
+    <div class="phases-header reveal">
+      <span class="sec-label">Investment Roadmap</span>
+      <h2>Prices by <em>Phases</em></h2>
+      <p>Watch how land values appreciate with each infrastructure milestone. Early investors in Phase 1 have already seen significant returns, Phase 2 entry is now open.</p>
+    </div>
+
+    <div class="phases-img-wrap reveal reveal-delay-1">
+      <img
+        src="https://github.com/qwuitty-prog/7-12-Waale/blob/main/assets/prices_by_phases.png?raw=true"
+        alt="Prices by Phases — Land value appreciation across infrastructure milestones"
+        loading="lazy"
+      />
+    </div>
+
+    <div class="phases-note reveal reveal-delay-2">
+      <div class="phases-note-dot"></div>
+      <p><strong>Note:</strong> Price appreciation is linked to infrastructure completion milestones — NMIA airport, Atal Setu, and the Alibaug–Virar corridor. Contact us for the latest phase pricing and availability.</p>
+    </div>
+  </div>
+</section>
+
 <!-- CTA BANNER -->
 <section id="cta-banner">
   <div class="cta-ambient1"></div>
@@ -927,7 +1033,7 @@
   <div class="cta-inner reveal">
     <span class="sec-label">Get Started Today</span>
     <h2>Ready to Find Your <em>Perfect Plot?</em></h2>
-    <p>Whether you're a first-time buyer or a seasoned investor, our team is ready to guide you. Get a free 7/12 consultation — no obligations, just clarity on your next best move.</p>
+    <p>Whether you're a first-time buyer or a seasoned investor, our team is ready to guide you. Get a free 7/12 consultation, no obligations, just clarity on your next best move.</p>
     <div class="cta-btns">
       <a href="contact.html" class="btn-gold-solid">Book a Free Consultation &rarr;</a>
       <a href="contact.html" class="btn-ghost">Browse All Plots</a>
@@ -942,12 +1048,6 @@
       <div class="logo-main">7/12 <span>Waale</span></div>
       <span class="footer-sub">Plots & Land Experts · Maharashtra</span>
       <p>We simplify land and plot ownership across Maharashtra, clear 7/12 records, verified titles, and trusted guidance from search to registration.</p>
-      <div class="footer-social">
-        <a href="#" class="soc-btn" aria-label="WhatsApp">💬</a>
-        <a href="#" class="soc-btn" aria-label="Instagram">📸</a>
-        <a href="#" class="soc-btn" aria-label="Facebook">📘</a>
-        <a href="#" class="soc-btn" aria-label="YouTube">▶️</a>
-      </div>
     </div>
     <div class="footer-col">
       <h4>Quick Links</h4>

@@ -416,9 +416,7 @@
       pointer-events: none;
     }
 
-    .phases-inner {
-      position: relative; z-index: 2;
-    }
+    .phases-inner { position: relative; z-index: 2; }
     .phases-header { margin-bottom: 3rem; }
     .phases-header .sec-label { color: var(--plant-lime); }
     .phases-header h2 {
@@ -479,11 +477,7 @@
       flex-shrink: 0;
       animation: pulse 2.5s ease-in-out infinite;
     }
-    .phases-note p {
-      font-size: .78rem;
-      color: rgba(232,201,154,.55);
-      line-height: 1.6;
-    }
+    .phases-note p { font-size: .78rem; color: rgba(232,201,154,.55); line-height: 1.6; }
     .phases-note strong { color: rgba(232,201,154,.85); font-weight: 600; }
 
     /* CTA BANNER */
@@ -604,7 +598,6 @@
         flex-direction: column;
         position: fixed;
         top: 76px; left: 0; right: 0;
-        /* ── MOBILE NAV FIX: fully opaque dark background so links are readable over the hero video ── */
         background: rgba(10,6,3,0.98);
         padding: 1.5rem 7% 2rem;
         border-bottom: 1px solid rgba(200,150,58,.15);
@@ -614,7 +607,6 @@
         z-index: 495;
       }
       .nav-links.open { display: flex; }
-      /* Override link colours for dark mobile menu */
       .nav-links a {
         color: rgba(232,201,154,.85) !important;
         font-size: .9rem;
@@ -623,10 +615,7 @@
         width: 100%;
       }
       .nav-links a:hover,
-      .nav-links a.active {
-        color: var(--plant-lime) !important;
-      }
-      /* Enquire Now button inside mobile menu */
+      .nav-links a.active { color: var(--plant-lime) !important; }
       .nav-links .btn-nav {
         background: linear-gradient(135deg, var(--plant-mid), var(--plant-fresh)) !important;
         border-color: transparent !important;
@@ -809,38 +798,60 @@
             <feGaussianBlur stdDeviation="8" result="blur"/>
             <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
           </filter>
-          <radialGradient id="plot-grad" cx="50%" cy="40%" r="55%">
-            <stop offset="0%" stop-color="#2E7D36"/>
-            <stop offset="60%" stop-color="#1A5C24"/>
-            <stop offset="100%" stop-color="#0D2410"/>
+          <!-- Circular clip for land image -->
+          <clipPath id="land-img-clip">
+            <circle cx="430" cy="310" r="60"/>
+          </clipPath>
+          <!-- Gold vignette overlay gradient -->
+          <radialGradient id="img-vignette" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="rgba(0,0,0,0)" stop-opacity="0"/>
+            <stop offset="75%" stop-color="rgba(0,0,0,0)" stop-opacity="0"/>
+            <stop offset="100%" stop-color="#C8963A" stop-opacity="0.45"/>
           </radialGradient>
         </defs>
-        <line id="line-nh4b" x1="430" y1="285" x2="185" y2="118" stroke="rgba(94,186,98,0.3)" stroke-width="1.5" stroke-dasharray="6 4" class="conn-line" data-id="nh4b"/>
-        <line id="line-rail" x1="430" y1="285" x2="680" y2="118" stroke="rgba(94,186,98,0.3)" stroke-width="1.5" stroke-dasharray="6 4" class="conn-line" data-id="rail"/>
+
+        <!-- Connector lines -->
+        <line id="line-nh4b"    x1="430" y1="285" x2="185" y2="118" stroke="rgba(94,186,98,0.3)" stroke-width="1.5" stroke-dasharray="6 4" class="conn-line" data-id="nh4b"/>
+        <line id="line-rail"    x1="430" y1="285" x2="680" y2="118" stroke="rgba(94,186,98,0.3)" stroke-width="1.5" stroke-dasharray="6 4" class="conn-line" data-id="rail"/>
         <line id="line-alibaug" x1="395" y1="310" x2="100" y2="310" stroke="rgba(94,186,98,0.3)" stroke-width="1.5" stroke-dasharray="6 4" class="conn-line" data-id="alibaug"/>
-        <line id="line-jnpt" x1="410" y1="345" x2="185" y2="498" stroke="rgba(94,186,98,0.3)" stroke-width="1.5" stroke-dasharray="6 4" class="conn-line" data-id="jnpt"/>
-        <line id="line-nmia" x1="450" y1="345" x2="680" y2="498" stroke="rgba(94,186,98,0.3)" stroke-width="1.5" stroke-dasharray="6 4" class="conn-line" data-id="nmia"/>
-        <line id="line-atal" x1="465" y1="310" x2="760" y2="310" stroke="rgba(94,186,98,0.3)" stroke-width="1.5" stroke-dasharray="6 4" class="conn-line" data-id="atal"/>
+        <line id="line-jnpt"    x1="410" y1="345" x2="185" y2="498" stroke="rgba(94,186,98,0.3)" stroke-width="1.5" stroke-dasharray="6 4" class="conn-line" data-id="jnpt"/>
+        <line id="line-nmia"    x1="450" y1="345" x2="680" y2="498" stroke="rgba(94,186,98,0.3)" stroke-width="1.5" stroke-dasharray="6 4" class="conn-line" data-id="nmia"/>
+        <line id="line-atal"    x1="465" y1="310" x2="760" y2="310" stroke="rgba(94,186,98,0.3)" stroke-width="1.5" stroke-dasharray="6 4" class="conn-line" data-id="atal"/>
+
+        <!-- ===== CENTER NODE: land image in gold circle ===== -->
         <g id="plot-center">
-          <circle cx="430" cy="310" r="88" fill="none" stroke="rgba(94,186,98,0.12)" stroke-width="24"/>
-          <circle cx="430" cy="310" r="72" fill="none" stroke="rgba(94,186,98,0.18)" stroke-width="1" stroke-dasharray="4 3"/>
-          <circle cx="430" cy="310" r="60" fill="url(#plot-grad)" filter="url(#glow-green)"/>
-          <ellipse cx="430" cy="322" rx="44" ry="18" fill="rgba(94,186,98,0.18)"/>
-          <g fill="none" stroke="#5EBA62" stroke-linecap="round" stroke-width="1.5" opacity="0.7">
-            <path d="M408,316 Q406,304 410,298 Q413,304 411,316"/>
-            <path d="M418,320 Q415,306 420,298 Q423,306 421,320"/>
-            <path d="M428,318 Q426,302 430,294 Q434,302 432,318"/>
-            <path d="M438,320 Q436,306 441,298 Q444,306 442,320"/>
-            <path d="M449,316 Q447,304 452,298 Q455,304 452,316"/>
-            <path d="M413,328 Q411,318 415,313 Q418,318 416,328"/>
-            <path d="M435,330 Q433,318 437,312 Q440,318 438,330"/>
-            <path d="M450,326 Q448,316 452,311 Q455,316 453,326"/>
-          </g>
-          <rect x="412" y="318" width="14" height="10" rx="2" fill="none" stroke="rgba(200,150,58,0.5)" stroke-width="0.8"/>
-          <rect x="428" y="318" width="14" height="10" rx="2" fill="none" stroke="rgba(200,150,58,0.5)" stroke-width="0.8"/>
-          <rect x="444" y="318" width="14" height="10" rx="2" fill="none" stroke="rgba(200,150,58,0.5)" stroke-width="0.8"/>
-          <text x="430" y="343" text-anchor="middle" fill="#E8CA80" font-family="'Cormorant Garamond',serif" font-size="13" font-weight="700" letter-spacing="1">YOUR PLOT</text>
+          <!-- Animated outer pulse ring -->
+          <circle cx="430" cy="310" r="88" fill="none" stroke="rgba(200,150,58,0.10)" stroke-width="20"/>
+          <!-- Gold border -->
+          <circle cx="430" cy="310" r="66" fill="none" stroke="rgba(200,150,58,0.65)" stroke-width="2.5"/>
+          <!-- Inner dashed ring -->
+          <circle cx="430" cy="310" r="62" fill="none" stroke="rgba(232,201,154,0.25)" stroke-width="1" stroke-dasharray="4 3"/>
+          <!-- Dark fallback background -->
+          <circle cx="430" cy="310" r="60" fill="#0a0603"/>
+          <!-- Land image clipped to circle -->
+          <image
+            href="https://github.com/qwuitty-prog/7-12-Waale/blob/main/assets/land.png?raw=true"
+            x="370" y="250"
+            width="120" height="120"
+            clip-path="url(#land-img-clip)"
+            preserveAspectRatio="xMidYMid slice"
+          />
+          <!-- Gold vignette edge on the image -->
+          <circle cx="430" cy="310" r="60" fill="url(#img-vignette)"/>
+          <!-- YOUR PLOT label — lowered to sit just below centre -->
+          <text
+            x="430" y="298"
+            text-anchor="middle"
+            fill="#E8CA80"
+            font-family="'Outfit',sans-serif"
+            font-size="9.5"
+            font-weight="700"
+            letter-spacing="2.5"
+          >YOUR PLOT</text>
         </g>
+        <!-- ===== END CENTER NODE ===== -->
+
+        <!-- Surrounding connector nodes -->
         <g class="conn-node" data-id="nh4b" id="node-nh4b" style="cursor:pointer;" transform="translate(100,52)">
           <rect x="0" y="0" width="165" height="66" rx="12" fill="rgba(13,36,16,0.85)" stroke="rgba(94,186,98,0.3)" stroke-width="1"/>
           <g transform="translate(14,12)">
@@ -925,12 +936,7 @@
           <text x="62" y="36" fill="rgba(232,201,154,0.45)" font-family="'Outfit',sans-serif" font-size="9.5">Mumbai Trans Harbour Link</text>
           <text x="62" y="51" fill="#5EBA62" font-family="'Outfit',sans-serif" font-size="9" font-weight="600">15 min to S. Mumbai</text>
         </g>
-        <circle id="dot-nh4b"    cx="398" cy="294" r="3.5" fill="rgba(94,186,98,0.5)" class="conn-dot" data-id="nh4b"/>
-        <circle id="dot-rail"    cx="462" cy="294" r="3.5" fill="rgba(94,186,98,0.5)" class="conn-dot" data-id="rail"/>
-        <circle id="dot-alibaug" cx="395" cy="310" r="3.5" fill="rgba(94,186,98,0.5)" class="conn-dot" data-id="alibaug"/>
-        <circle id="dot-jnpt"    cx="410" cy="345" r="3.5" fill="rgba(94,186,98,0.5)" class="conn-dot" data-id="jnpt"/>
-        <circle id="dot-nmia"    cx="450" cy="345" r="3.5" fill="rgba(94,186,98,0.5)" class="conn-dot" data-id="nmia"/>
-        <circle id="dot-atal"    cx="465" cy="310" r="3.5" fill="rgba(94,186,98,0.5)" class="conn-dot" data-id="atal"/>
+
       </svg>
 
       <div id="conn-tooltip" style="display:none;position:absolute;background:rgba(13,36,16,0.97);border:1px solid rgba(94,186,98,0.4);border-radius:10px;padding:12px 16px;max-width:240px;pointer-events:none;z-index:10;box-shadow:0 8px 32px rgba(0,0,0,0.4);">
@@ -1004,10 +1010,9 @@
   function activate(id) {
     document.querySelectorAll('.conn-line').forEach(l => l.classList.toggle('active', l.dataset.id === id));
     document.querySelectorAll('.conn-node').forEach(n => n.classList.toggle('active', n.dataset.id === id));
-    document.querySelectorAll('.conn-dot').forEach(d => d.classList.toggle('active', d.dataset.id === id));
   }
   function deactivate() {
-    document.querySelectorAll('.conn-line,.conn-node,.conn-dot').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.conn-line,.conn-node').forEach(el => el.classList.remove('active'));
     tooltip.style.display = 'none';
   }
   function showTooltip(id, evt) {
@@ -1024,7 +1029,7 @@
     tooltip.style.top = y + 'px';
   }
 
-  document.querySelectorAll('.conn-node, .conn-line, .conn-dot').forEach(el => {
+  document.querySelectorAll('.conn-node, .conn-line').forEach(el => {
     el.addEventListener('mouseenter', function(e) { activate(this.dataset.id); });
     el.addEventListener('mousemove', function(e) { showTooltip(this.dataset.id, e); });
     el.addEventListener('mouseleave', deactivate);
@@ -1036,7 +1041,7 @@
   });
 
   document.addEventListener('touchstart', function(e) {
-    if (!e.target.closest('.conn-node, .conn-line, .conn-dot')) deactivate();
+    if (!e.target.closest('.conn-node, .conn-line')) deactivate();
   });
 })();
 </script>

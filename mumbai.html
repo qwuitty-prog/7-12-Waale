@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Why Mumbai 3.0 - 7/12 Wale</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --soil-deep:    #0E0905;
+      --soil-mid:     #3D2410;
+      --soil-warm:    #6B4423;
+      --soil-light:   #A8743D;
+      --soil-pale:    #E8C99A;
+      --soil-cream:   #F7F1E8;
+      --plant-deep:   #0D2410;
+      --plant-mid:    #1A5C24;
+      --plant-fresh:  #2E7D36;
+      --plant-lime:   #5EBA62;
+      --plant-mist:   #B5D9B8;
+      --white:        #FFFFFF;
+      --text:         #150A02;
+      --muted:        #7A5E3E;
+      --gold:         #C8963A;
+      --gold-light:   #E8CA80;
+      --gold-glow:    rgba(200,150,58,.35);
+      --green-glow:   rgba(94,186,98,.25);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: 'Outfit', sans-serif; background: var(--soil-cream); color: var(--text); overflow-x: hidden; }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; }
+
+    .hl-underline { text-decoration: underline; text-decoration-color: var(--gold); text-underline-offset: 3px; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+      height: 76px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+      background: transparent;
+      backdrop-filter: none;
+      border-bottom: 1px solid transparent;
+      transition: background .45s ease, box-shadow .45s ease, border-color .45s ease, backdrop-filter .45s ease;
+    }
+    nav.scrolled {
+      background: rgba(247,241,232,0.97);
+      backdrop-filter: blur(24px) saturate(1.6);
+      border-bottom: 1px solid rgba(107,68,35,.12);
+      box-shadow: 0 2px 40px rgba(14,9,5,.10);
+    }
+    .logo-wrap { display: flex; flex-direction: column; line-height: 1; cursor: pointer; }
+    .logo-main { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.75rem; color: var(--white); letter-spacing: -.5px; transition: color .45s ease; text-shadow: 0 1px 8px rgba(0,0,0,.55), 0 2px 20px rgba(0,0,0,.35); }
+    .logo-main span { color: var(--plant-lime); transition: color .45s ease; }
+    nav.scrolled .logo-main { color: var(--soil-mid); text-shadow: none; }
+    nav.scrolled .logo-main span { color: var(--plant-mid); }
+    .logo-sub { font-size: .52rem; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,.65); margin-top: 2px; transition: color .45s ease; }
+    nav.scrolled .logo-sub { color: var(--soil-warm); }
+    .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: .82rem; font-weight: 500; letter-spacing: .4px; color: rgba(255,255,255,.88); position: relative; padding-bottom: 4px; transition: color .25s; text-shadow: 0 1px 8px rgba(0,0,0,.55), 0 2px 20px rgba(0,0,0,.35); }
+    nav.scrolled .nav-links a { color: var(--soil-mid); text-shadow: none; }
+    .nav-links a::after { content: ''; position: absolute; left: 0; bottom: 0; width: 0; height: 1.5px; background: linear-gradient(90deg, var(--plant-mid), var(--plant-lime)); transition: width .3s ease; }
+    .nav-links a:hover, .nav-links a.active { color: var(--white); }
+    nav.scrolled .nav-links a:hover, nav.scrolled .nav-links a.active { color: var(--plant-mid); }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+    .btn-nav { background: rgba(255,255,255,.15) !important; color: var(--white) !important; padding: .52rem 1.5rem !important; border-radius: 6px; font-size: .8rem !important; font-weight: 600 !important; letter-spacing: .4px; border: 1px solid rgba(255,255,255,.3) !important; transition: transform .2s, box-shadow .25s, background .45s !important; }
+    nav.scrolled .btn-nav { background: linear-gradient(135deg, var(--plant-mid), var(--plant-fresh)) !important; border-color: transparent !important; box-shadow: 0 3px 18px var(--green-glow); }
+    .btn-nav::after { display: none !important; }
+    .btn-nav:hover { transform: translateY(-2px) !important; background: rgba(255,255,255,.25) !important; }
+    nav.scrolled .btn-nav:hover { background: linear-gradient(135deg, var(--plant-fresh), var(--plant-mid)) !important; box-shadow: 0 8px 28px var(--green-glow) !important; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 6px; position: relative; z-index: 510; }
+    .hamburger span { width: 22px; height: 2px; background: var(--white); border-radius: 2px; transition: transform .3s, opacity .3s, background .45s; display: block; }
+    nav.scrolled .hamburger span { background: var(--soil-mid); }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-overlay { display: none; position: fixed; inset: 0; z-index: 490; background: rgba(14,9,5,.35); backdrop-filter: blur(2px); }
+    .nav-overlay.open { display: block; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      padding-top: 76px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      position: relative;
+      overflow: hidden;
+      background: #050302;
+    }
+
+    /* ── SLIDESHOW CONTAINER ── */
+    .hero-slideshow {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      z-index: 0;
+      /* Zoom runs always — no restart, no stutter */
+      animation: slideZoom 12s ease-in-out infinite alternate;
+      /* Fade is a separate transition */
+      transition: opacity 2.2s ease-in-out;
+      will-change: opacity;
+    }
+
+    /* Stagger zoom phase so slides don't all pulse in sync */
+    .hero-slide:nth-child(2) { animation-delay: -4s; }
+    .hero-slide:nth-child(3) { animation-delay: -8s; }
+
+    .hero-slide.active {
+      opacity: 1;
+      z-index: 1;
+    }
+
+    @keyframes slideZoom {
+      0%   { transform: scale(1.00); }
+      100% { transform: scale(1.08); }
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(to top,
+        rgba(5,3,1,0.88) 0%,
+        rgba(8,5,2,0.40) 35%,
+        transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative; z-index: 3;
+      width: 100%;
+      padding: 0 0 6rem;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+    }
+
+    .hero-title-wrap {
+      text-align: center;
+      position: relative;
+      white-space: nowrap;
+    }
+
+    .hero-title-wrap::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 175%; height: 340%;
+      background: radial-gradient(ellipse at center,
+        rgba(225,168,55,.32)  0%,
+        rgba(200,150,58,.18) 24%,
+        rgba(94,186,98,.08)  52%,
+        transparent          72%);
+      filter: blur(52px);
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0;
+      animation:
+        glowFadeIn 1.2s ease 1.7s forwards,
+        glowPulse  5.5s ease-in-out 2.9s infinite;
+    }
+    @keyframes glowFadeIn { to { opacity: 1; } }
+    @keyframes glowPulse {
+      0%,100% { transform: translate(-50%,-50%) scale(1);    filter: blur(52px); }
+      50%      { transform: translate(-50%,-50%) scale(1.07); filter: blur(60px); }
+    }
+
+    .hero-title-wrap::after {
+      content: '';
+      position: absolute;
+      top: 62%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 95%; height: 190%;
+      background: radial-gradient(ellipse at center,
+        rgba(245,195,85,.22)  0%,
+        rgba(210,155,58,.08) 42%,
+        transparent          70%);
+      filter: blur(28px);
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0;
+      animation: glowFadeIn 1s ease 2.1s forwards;
+    }
+
+    .hero-h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.2rem, 7vw, 7rem);
+      font-weight: 700;
+      line-height: 1.05;
+      color: var(--white);
+      white-space: nowrap;
+      opacity: 0;
+      animation: heroTextIn 1s cubic-bezier(0.22, 0.61, 0.36, 1) 1.2s forwards;
+    }
+    @keyframes heroTextIn {
+      from { opacity: 0; transform: translateY(26px); }
+      to   { opacity: 1; transform: translateY(0);    }
+    }
+
+    .hero-h1 .welcome-line {
+      display: block;
+      font-size: clamp(1.1rem, 2.4vw, 2rem);
+      font-weight: 400;
+      letter-spacing: 10px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.94);
+      margin-bottom: .55rem;
+      text-shadow:
+        0 0 18px rgba(255,255,255,.60),
+        0 0 55px rgba(255,255,255,.22),
+        0 2px 12px rgba(0,0,0,.65);
+    }
+
+    .hero-h1 .accent {
+      display: block;
+      font-style: italic;
+      background: linear-gradient(96deg,
+        #c8830a  0%,
+        #e8ca80  30%,
+        #f7eeaa  54%,
+        #5eba62  100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter:
+        drop-shadow(0 0 10px rgba(248,210,90,1.0))
+        drop-shadow(0 0 30px rgba(210,158,50,.90))
+        drop-shadow(0 0 70px rgba(200,150,58,.55))
+        drop-shadow(0 0 120px rgba(200,140,40,.28))
+        drop-shadow(0 5px 18px rgba(0,0,0,.60));
+    }
+
+    /* MARQUEE */
+    .marquee-strip { background: linear-gradient(90deg, var(--soil-mid) 0%, var(--plant-deep) 50%, var(--soil-mid) 100%); padding: 1rem 0; overflow: hidden; position: relative; border-top: 1px solid rgba(200,150,58,.12); border-bottom: 1px solid rgba(200,150,58,.12); }
+    .marquee-strip::before, .marquee-strip::after { content: ''; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2; pointer-events: none; }
+    .marquee-strip::before { left: 0; background: linear-gradient(90deg, var(--soil-mid), transparent); }
+    .marquee-strip::after { right: 0; background: linear-gradient(-90deg, var(--soil-mid), transparent); }
+    .marquee-track { display: flex; gap: 4rem; white-space: nowrap; animation: marquee 36s linear infinite; }
+    .marquee-item { font-size: .68rem; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--soil-pale); display: inline-flex; align-items: center; gap: 1rem; flex-shrink: 0; }
+    .m-dot { width: 5px; height: 5px; background: var(--gold); border-radius: 50%; box-shadow: 0 0 6px var(--gold); }
+    @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+    /* SECTION COMMONS */
+    .sec-label { display: inline-block; font-size: .62rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--plant-mid); margin-bottom: 1rem; }
+    .sec-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3vw, 2.9rem); font-weight: 700; line-height: 1.15; color: var(--soil-deep); }
+    .sec-title em { color: var(--plant-mid); font-style: italic; }
+    .sec-desc { font-size: .97rem; line-height: 1.85; color: var(--muted); max-width: 620px; margin: 1rem auto 0; }
+    .section-header-left { margin-bottom: 4rem; }
+    .section-header-left .sec-label { color: var(--plant-mid); }
+    .section-header-left h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3vw, 2.9rem); font-weight: 700; line-height: 1.15; color: var(--soil-deep); text-align: left; }
+    .section-header-left h2 em { color: var(--plant-mid); font-style: italic; }
+    .section-header-left p { font-size: .95rem; line-height: 1.85; color: var(--muted); max-width: 580px; margin: .8rem 0 0; }
+
+    /* WHAT IS MUMBAI 3.0 */
+    #what { padding: 7rem 7%; background: var(--white); position: relative; overflow: hidden; }
+    #what::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, var(--plant-mid), var(--gold), var(--plant-mid), transparent); }
+    .what-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+    .what-text .sec-title { text-align: left; }
+    .what-body { margin-top: 1.6rem; font-size: 1rem; line-height: 1.92; color: var(--muted); }
+    .what-body p { margin-bottom: 1.2rem; }
+    .what-body strong { color: var(--soil-deep); font-weight: 600; }
+    .big-stat-row { display: flex; gap: 2.5rem; margin-top: 2.5rem; flex-wrap: wrap; }
+    .bstat .bn { font-family: 'Cormorant Garamond', serif; font-size: 3.2rem; font-weight: 700; color: var(--plant-deep); line-height: 1; }
+    .bstat .bn span { color: var(--gold); }
+    .bstat .bl { font-size: .68rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 1.5px; margin-top: .35rem; }
+    .what-img-block { position: relative; }
+    .what-img-block img { width: 100%; height: auto; object-fit: contain; border-radius: 20px; box-shadow: 0 24px 80px rgba(14,9,5,.18); background: #eee8dc; }
+    .what-img-badge { position: absolute; bottom: -1.5rem; left: -1.5rem; background: var(--white); border-radius: 14px; padding: 1.2rem 1.6rem; box-shadow: 0 12px 40px rgba(14,9,5,.14); border: 1px solid rgba(107,68,35,.07); }
+    .what-img-badge .wb-num { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 700; color: var(--plant-mid); line-height: 1; letter-spacing: .5px; }
+    .what-img-badge .wb-lbl { font-size: .7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1.5px; margin-top: .2rem; }
+
+    /* PRESS */
+    #press { padding: 6rem 7%; background: var(--white); position: relative; }
+    #press::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, var(--plant-mid), var(--gold), var(--plant-mid), transparent); }
+    .press-header { margin-bottom: 3.5rem; }
+    .press-header .sec-label { color: var(--plant-mid); }
+    .press-header h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3vw, 2.9rem); font-weight: 700; line-height: 1.15; color: var(--soil-deep); }
+    .press-header h2 em { color: var(--plant-mid); font-style: italic; }
+    .press-article { margin-bottom: 4rem; }
+    .press-article:last-child { margin-bottom: 0; }
+    .press-article-img-wrap { width: 100%; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 48px rgba(14,9,5,.13); border: 1px solid rgba(107,68,35,.1); }
+    .press-article-img-wrap img { width: 100%; height: auto; display: block; }
+    .press-article-info { margin-top: 1.6rem; padding: 1.6rem 2rem; background: linear-gradient(135deg, rgba(13,36,16,.04) 0%, rgba(200,150,58,.04) 100%); border-radius: 12px; border-left: 3px solid var(--gold); }
+    .press-article-info .press-source { font-size: .6rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--plant-mid); margin-bottom: .5rem; }
+    .press-article-info p { font-size: .95rem; line-height: 1.8; color: var(--muted); }
+    .press-article-info p strong { color: var(--soil-deep); font-weight: 600; }
+    .press-divider { border: none; border-top: 1px solid rgba(107,68,35,.1); margin: 4rem 0; }
+
+    /* IMAGE BREAK */
+    .img-break { height: 420px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    .img-break img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .img-break .img-break-desktop { display: block; }
+    .img-break .img-break-mobile { display: none; }
+    .img-break-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(14,9,5,.72) 0%, rgba(13,36,16,.55) 100%); }
+    .img-break-content { position: relative; z-index: 2; text-align: center; padding: 2rem 7%; }
+    .big-quote-text { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3.8rem); font-weight: 700; color: var(--white); line-height: 1.2; max-width: 860px; }
+    .big-quote-text em { font-style: italic; background: linear-gradient(90deg, var(--gold), var(--gold-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    /* INFRA CARDS */
+    #infra-detail { padding: 7rem 7%; background: linear-gradient(180deg, var(--soil-cream) 0%, #ede5d4 100%); position: relative; }
+    #infra-detail::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(107,68,35,.2), transparent); }
+    .infra-cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .infra-card { background: var(--white); border-radius: 18px; overflow: hidden; border: 1px solid rgba(107,68,35,.07); box-shadow: 0 4px 24px rgba(14,9,5,.05); transition: transform .35s, box-shadow .35s; }
+    .infra-card:hover { transform: translateY(-6px); box-shadow: 0 20px 56px rgba(14,9,5,.12); }
+    .infra-card-img { position: relative; height: 185px; overflow: hidden; }
+    .infra-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+    .infra-card:hover .infra-card-img img { transform: scale(1.06); }
+    .infra-card-img::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 55px; background: linear-gradient(to top, rgba(14,9,5,.4), transparent); pointer-events: none; }
+    .infra-card-tag { position: absolute; top: .75rem; left: .75rem; font-size: .55rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: .22rem .65rem; border-radius: 4px; z-index: 2; }
+    .infra-card-tag.air { background: rgba(26,92,36,.85); color: var(--plant-lime); }
+    .infra-card-tag.road { background: rgba(200,150,58,.85); color: var(--soil-deep); }
+    .infra-card-tag.sea { background: rgba(14,9,5,.75); color: var(--soil-pale); }
+    .infra-card-tag.metro { background: rgba(107,68,35,.85); color: var(--soil-pale); }
+    .infra-card-tag.smart { background: rgba(46,125,54,.85); color: var(--white); }
+    .ic-body { padding: .85rem 1.3rem 1.5rem; }
+    .ic-body h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.08rem; font-weight: 700; color: var(--soil-deep); margin-bottom: .4rem; line-height: 1.25; }
+    .ic-body p { font-size: .8rem; line-height: 1.65; color: var(--muted); margin-bottom: .75rem; }
+    .ic-stat { display: flex; gap: .45rem; flex-wrap: wrap; }
+    .ic-chip { font-size: .6rem; font-weight: 600; padding: .2rem .55rem; border-radius: 4px; background: rgba(26,92,36,.08); color: var(--plant-mid); border: 1px solid rgba(26,92,36,.12); }
+
+    /* WEALTH */
+    #wealth { padding: 7rem 7%; background: var(--soil-deep); position: relative; overflow: hidden; }
+    .wc-bg1 { position: absolute; top: -20%; left: -5%; width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(26,92,36,.14) 0%, transparent 60%); pointer-events: none; }
+    .wc-bg2 { position: absolute; bottom: -15%; right: 0%; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(200,150,58,.08) 0%, transparent 60%); pointer-events: none; }
+    .wealth-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; position: relative; z-index: 2; }
+    .wealth-text .sec-label { color: var(--plant-lime); }
+    .wealth-text .sec-title { text-align: left; color: var(--soil-pale); }
+    .wealth-text .sec-title em { color: var(--gold); }
+    .wealth-body { font-size: .97rem; line-height: 1.88; color: rgba(232,201,154,.5); margin-top: 1.4rem; }
+    .wealth-body p { margin-bottom: 1rem; }
+    .wealth-body strong { color: var(--gold); font-weight: 600; }
+    .wealth-items { margin-top: 2rem; display: flex; flex-direction: column; gap: .9rem; }
+    .wealth-item { display: flex; align-items: flex-start; gap: 1.2rem; padding: 1.2rem 1.4rem; border-radius: 12px; background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.065); transition: background .3s, border-color .3s, transform .3s; }
+    .wealth-item:hover { background: rgba(255,255,255,.07); border-color: rgba(94,186,98,.2); transform: translateX(6px); }
+    .wi-icon { width: 42px; height: 42px; border-radius: 10px; background: rgba(94,186,98,.1); border: 1px solid rgba(94,186,98,.18); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .wealth-item h4 { font-size: .92rem; font-weight: 600; color: rgba(232,201,154,.9); margin-bottom: .2rem; }
+    .wealth-item p { font-size: .82rem; color: rgba(232,201,154,.42); line-height: 1.6; }
+    .stat-boxes { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .sb { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 16px; padding: 2rem 1.4rem; transition: background .3s, transform .3s, border-color .3s; position: relative; overflow: hidden; }
+    .sb::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); opacity: 0; transition: opacity .3s; }
+    .sb:hover { background: rgba(255,255,255,.08); transform: translateY(-4px); border-color: rgba(200,150,58,.2); }
+    .sb:hover::after { opacity: 1; }
+    .sb .big { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 700; color: var(--gold); line-height: 1; text-shadow: 0 0 30px rgba(200,150,58,.4); word-break: break-word; overflow-wrap: break-word; }
+    .sb .sm { font-size: .68rem; font-weight: 500; color: rgba(232,201,154,.42); text-transform: uppercase; letter-spacing: 1.5px; margin-top: .5rem; line-height: 1.55; }
+
+    /* CTA */
+    #cta-banner { padding: 8rem 7%; background: var(--soil-deep); position: relative; overflow: hidden; text-align: center; }
+    .cta-ambient1 { position: absolute; top: -30%; left: 50%; transform: translateX(-50%); width: 800px; height: 800px; border-radius: 50%; background: radial-gradient(circle, rgba(26,92,36,.12) 0%, transparent 60%); pointer-events: none; }
+    .cta-ambient2 { position: absolute; bottom: -20%; right: 5%; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(200,150,58,.08) 0%, transparent 60%); pointer-events: none; }
+    .cta-grid-lines { position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(rgba(255,255,255,.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.015) 1px, transparent 1px); background-size: 80px 80px; }
+    .cta-inner { position: relative; z-index: 2; max-width: 700px; margin: 0 auto; }
+    .cta-inner .sec-label { color: var(--plant-lime); }
+    .cta-inner h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 3.5vw, 3.2rem); font-weight: 700; color: var(--white); line-height: 1.18; margin: .8rem 0 1.2rem; }
+    .cta-inner h2 em { background: linear-gradient(90deg, var(--gold), var(--gold-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-style: italic; }
+    .cta-inner p { font-size: .97rem; color: rgba(232,201,154,.55); line-height: 1.82; margin-bottom: 2.8rem; }
+    .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-gold-solid { background: linear-gradient(135deg, var(--gold), #E8B050); color: var(--soil-deep); padding: 1rem 2.8rem; border-radius: 7px; font-weight: 700; font-size: .95rem; letter-spacing: .3px; box-shadow: 0 8px 32px rgba(200,150,58,.35); transition: transform .25s, box-shadow .25s; display: inline-flex; align-items: center; gap: .5rem; }
+    .btn-gold-solid:hover { transform: translateY(-3px); box-shadow: 0 16px 48px rgba(200,150,58,.45); }
+    .btn-ghost { border: 1.5px solid rgba(255,255,255,.18); color: rgba(255,255,255,.75); padding: 1rem 2.8rem; border-radius: 7px; font-weight: 500; font-size: .95rem; display: inline-flex; align-items: center; gap: .5rem; backdrop-filter: blur(8px); transition: background .25s, border-color .25s, transform .25s; }
+    .btn-ghost:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.4); transform: translateY(-3px); }
+
+    /* FOOTER */
+    footer { background: linear-gradient(180deg, #0a0603 0%, #060402 100%); padding: 5.5rem 7% 2.5rem; border-top: 1px solid rgba(255,255,255,.05); }
+    .footer-grid { display: grid; grid-template-columns: 2.2fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem; }
+    .footer-brand .logo-main { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.7rem; color: var(--soil-pale); }
+    .footer-brand .logo-main span { color: var(--plant-lime); }
+    .footer-sub { font-size: .52rem; letter-spacing: 3.5px; text-transform: uppercase; color: rgba(232,201,154,.25); margin-top: 2px; margin-bottom: 1.4rem; display: block; }
+    .footer-brand p { font-size: .83rem; line-height: 1.8; color: rgba(232,201,154,.38); max-width: 280px; }
+    .footer-col h4 { font-size: .65rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: rgba(232,201,154,.6); margin-bottom: 1.5rem; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .7rem; }
+    .footer-col a { font-size: .83rem; color: rgba(232,201,154,.35); transition: color .2s; }
+    .footer-col a:hover { color: var(--plant-lime); }
+    .footer-divider { border: none; border-top: 1px solid rgba(255,255,255,.055); margin-bottom: 2rem; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-bottom p { font-size: .77rem; color: rgba(232,201,154,.22); }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a { font-size: .77rem; color: rgba(232,201,154,.22); transition: color .2s; }
+    .footer-links a:hover { color: var(--plant-lime); }
+
+    #scrollTop { position: fixed; bottom: 2rem; right: 2rem; z-index: 600; width: 48px; height: 48px; border-radius: 10px; background: linear-gradient(135deg, var(--plant-mid), var(--plant-fresh)); color: var(--white); border: none; cursor: pointer; font-size: 1rem; box-shadow: 0 6px 24px var(--green-glow); display: none; align-items: center; justify-content: center; transition: transform .2s, box-shadow .25s; }
+    #scrollTop:hover { transform: translateY(-3px); box-shadow: 0 12px 36px var(--green-glow); }
+    #scrollTop.visible { display: flex; }
+
+    /* SCROLL ANIMATIONS */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .75s ease, transform .75s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-left { opacity: 0; transform: translateX(-28px); transition: opacity .75s ease, transform .75s ease; }
+    .reveal-left.visible { opacity: 1; transform: none; }
+    .reveal-right { opacity: 0; transform: translateX(28px); transition: opacity .75s ease, transform .75s ease; }
+    .reveal-right.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+
+    /* RESPONSIVE */
+    @media(max-width:1100px) {
+      .what-grid, .wealth-grid { grid-template-columns: 1fr; gap: 3.5rem; }
+      .infra-cards-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
+      .footer-brand { grid-column: 1 / -1; }
+      .what-img-badge { bottom: 1rem; left: 1rem; }
+    }
+    @media(max-width:960px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: fixed;
+        top: 76px; left: 0; right: 0;
+        background: rgba(10,6,3,0.98);
+        padding: 1.5rem 7% 2rem;
+        border-bottom: 1px solid rgba(200,150,58,.15);
+        gap: 1.2rem;
+        backdrop-filter: blur(24px) saturate(1.4);
+        box-shadow: 0 8px 40px rgba(0,0,0,.6);
+        z-index: 495;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a {
+        color: rgba(232,201,154,.85) !important;
+        font-size: .9rem;
+        padding: .4rem 0;
+        border-bottom: 1px solid rgba(255,255,255,.04);
+        width: 100%;
+      }
+      .nav-links a:hover,
+      .nav-links a.active {
+        color: var(--plant-lime) !important;
+      }
+      .nav-links .btn-nav {
+        background: linear-gradient(135deg, var(--plant-mid), var(--plant-fresh)) !important;
+        border-color: transparent !important;
+        color: var(--white) !important;
+        margin-top: .4rem;
+        text-align: center;
+        justify-content: center;
+        border-radius: 7px;
+        padding: .75rem 1.5rem !important;
+        border-bottom: none !important;
+        box-shadow: 0 4px 20px var(--green-glow);
+      }
+      .hamburger { display: flex; }
+      .img-break { height: 300px; }
+      .big-quote-text { font-size: 1.6rem !important; }
+    }
+    @media(max-width:700px) {
+      .hero-h1 { white-space: normal; text-align: center; }
+      .hero-h1 .welcome-line { letter-spacing: 5px; }
+      .hero-title-wrap::before { width: 210%; }
+      .hero-title-wrap::after { width: 170%; }
+      .img-break .img-break-desktop { display: none; }
+      .img-break .img-break-mobile  { display: block; }
+    }
+    @media(max-width:640px) {
+      .infra-cards-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+      .ic-body { padding: .6rem 1rem 1.1rem; }
+      .ic-body h3 { font-size: .9rem; }
+      .ic-body p { font-size: .75rem; }
+      .infra-card-img { height: 130px; }
+      .stat-boxes { grid-template-columns: 1fr 1fr; gap: .75rem; }
+      .sb { padding: 1.4rem 1rem; }
+      .sb .big { font-size: clamp(1.6rem, 7vw, 2.4rem); }
+      .sb .sm { font-size: .6rem; letter-spacing: 1px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .footer-brand { grid-column: 1 / -1; }
+      .footer-col:nth-child(2) { grid-column: 1; }
+      .footer-col:nth-child(3) { grid-column: 2; }
+      .cta-btns { flex-direction: column; align-items: center; }
+      .big-stat-row { gap: 1.5rem; }
+    }
+    @media(max-width:400px) {
+      .stat-boxes { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="nav-overlay" id="navOverlay" onclick="closeMenu()"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="logo-wrap">
+    <div class="logo-main">7/12 <span>Wale</span></div>
+    <div class="logo-sub">Plots &amp; Land Experts · Maharashtra</div>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="mumbai.html" class="active">Why Mumbai 3.0</a></li>
+    <li><a href="contact.html" class="btn-nav">Enquire Now</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <!-- SLIDESHOW -->
+  <div class="hero-slideshow" id="heroSlideshow">
+    <div class="hero-slide" style="background-image:url('https://github.com/qwuitty-prog/7-12-Waale/blob/main/assets/NMIA.png?raw=true')"></div>
+    <div class="hero-slide" style="background-image:url('https://github.com/qwuitty-prog/7-12-Waale/blob/main/assets/atal_setu.png?raw=true')"></div>
+    <div class="hero-slide" style="background-image:url('https://github.com/qwuitty-prog/7-12-Waale/blob/main/assets/railway.png?raw=true')"></div>
+  </div>
+
+  <div class="hero-bg"></div>
+
+  <div class="hero-inner">
+    <div class="hero-title-wrap">
+      <h1 class="hero-h1">
+        <span class="welcome-line">Welcome to</span>
+        <span class="accent">Mumbai 3.0</span>
+      </h1>
+    </div>
+  </div>
+
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-item"><span class="m-dot"></span>NMIA Navi Mumbai Int'l Airport</span>
+    <span class="marquee-item"><span class="m-dot"></span>Atal Setu India's Longest Sea Bridge</span>
+    <span class="marquee-item"><span class="m-dot"></span>124 Villages · Uran · Panvel · Pen</span>
+    <span class="marquee-item"><span class="m-dot"></span>WEF 2026: Rs. 20 Lakh Crore Secured</span>
+    <span class="marquee-item"><span class="m-dot"></span>MMRDA-Backed Urban Development</span>
+    <span class="marquee-item"><span class="m-dot"></span>Govt of Maharashtra Planned Region</span>
+    <span class="marquee-item"><span class="m-dot"></span>24 MoUs in 3 Days at Davos</span>
+    <span class="marquee-item"><span class="m-dot"></span>NMIA Navi Mumbai Int'l Airport</span>
+    <span class="marquee-item"><span class="m-dot"></span>Atal Setu India's Longest Sea Bridge</span>
+    <span class="marquee-item"><span class="m-dot"></span>124 Villages · Uran · Panvel · Pen</span>
+    <span class="marquee-item"><span class="m-dot"></span>WEF 2026: Rs. 20 Lakh Crore Secured</span>
+    <span class="marquee-item"><span class="m-dot"></span>MMRDA-Backed Urban Development</span>
+    <span class="marquee-item"><span class="m-dot"></span>Govt of Maharashtra Planned Region</span>
+    <span class="marquee-item"><span class="m-dot"></span>24 MoUs in 3 Days at Davos</span>
+  </div>
+</div>
+
+<!-- WHAT IS MUMBAI 3.0 -->
+<section id="what">
+  <div class="what-grid">
+    <div class="what-text reveal-left">
+      <span class="sec-label">The Big Picture</span>
+      <h2 class="sec-title">What Is <em style="color:var(--plant-mid);">Mumbai 3.0?</em></h2>
+      <div class="what-body">
+        <p><strong style="color:var(--soil-deep);">Mumbai 3.0</strong> is an upcoming planned urban region in the <strong>Mumbai Metropolitan Region (MMR)</strong>, being developed under the Government of Maharashtra and <strong>MMRDA</strong>. Strategically located between Mumbai and Navi Mumbai across the <span class="hl-underline">Uran, Panvel, and Pen belt</span>, covering approximately <strong>124 villages.</strong></p>
+        <p>With major projects like the <strong>Navi Mumbai International Airport (NMIA)</strong>, the <strong>Atal Setu</strong> sea bridge, and upcoming corridors, this region is set to become the next growth hub of MMR, the way Navi Mumbai once evolved from concept to thriving city.</p>
+        <p>At <strong>7/12 Wale</strong>, we offer premium, investment-friendly plots right inside this belt, helping you build a <span class="hl-underline">secure and growing real estate portfolio.</span></p>
+      </div>
+      <div class="big-stat-row">
+        <div class="bstat"><div class="bn">124<span>+</span></div><div class="bl">Villages Covered</div></div>
+        <div class="bstat"><div class="bn">Rs.20L<span>cr</span></div><div class="bl">WEF 2026 Investments</div></div>
+        <div class="bstat"><div class="bn">24</div><div class="bl">MoUs in 3 Days</div></div>
+      </div>
+    </div>
+    <div class="what-img-block reveal-right">
+      <img src="https://github.com/qwuitty-prog/7-12-Waale/blob/main/assets/MMRDA.jpg?raw=true" alt="MMRDA Mumbai 3.0 Map"/>
+      <div class="what-img-badge">
+        <div class="wb-num">MMRDA</div>
+        <div class="wb-lbl">Detailed Map</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRESS COVERAGE -->
+<section id="press">
+  <div class="press-header reveal">
+    <span class="sec-label">As Seen In The Press</span>
+    <h2>Global Media Validates <em>Mumbai 3.0</em></h2>
+  </div>
+
+  <div class="press-article reveal">
+    <div class="press-article-img-wrap">
+      <img src="https://github.com/qwuitty-prog/7-12-Waale/blob/main/assets/hindustan%20times%20wef%20article.png?raw=true" alt="Hindustan Times WEF Article"/>
+    </div>
+    <div class="press-article-info">
+      <div class="press-source">Hindustan Times · WEF Davos 2026</div>
+      <p>At the World Economic Forum in Davos, <strong>MMRDA secured Rs. 20 lakh crore ($226 billion)</strong> in investment commitments through 24 MoUs signed in just three days. Mumbai 3.0 — the Uran, Panvel and Pen belt — was highlighted as a central pillar of this transformational urban growth story, drawing attention from the world's largest sovereign funds and institutional investors.</p>
+    </div>
+  </div>
+
+  <hr class="press-divider"/>
+
+  <div class="press-article reveal">
+    <div class="press-article-img-wrap">
+      <img src="https://github.com/qwuitty-prog/7-12-Waale/blob/main/assets/the%20hindu.png?raw=true" alt="The Hindu Article"/>
+    </div>
+    <div class="press-article-info">
+      <div class="press-source">The Hindu · Infrastructure &amp; Urban Development</div>
+      <p>As reported by The Hindu, <strong>Mumbai's expansion into the MMR belt is no longer a future prospect — it is actively underway.</strong> With the Navi Mumbai International Airport operational, the Atal Setu sea bridge open, and MMRDA-backed corridors under development, the region is on track to become one of India's most significant urban growth corridors of the next decade.</p>
+    </div>
+  </div>
+</section>
+
+<!-- IMAGE BREAK -->
+<div class="img-break">
+  <img
+    class="img-break-desktop"
+    src="https://github.com/qwuitty-prog/7-12-Waale/blob/main/assets/Picsart_26-04-20_17-23-00-018.png?raw=true"
+    alt="Infrastructure development"
+  />
+  <img
+    class="img-break-mobile"
+    src="https://github.com/qwuitty-prog/7-12-Waale/blob/main/assets/phone_view_lower.png?raw=true"
+    alt="Infrastructure development"
+  />
+  <div class="img-break-overlay"></div>
+  <div class="img-break-content">
+    <div class="big-quote-text reveal">
+      "The land that surrounds <em>great infrastructure</em> always becomes <em>great wealth.</em>"
+      <div style="font-family:'Outfit',sans-serif;font-size:.75rem;letter-spacing:3px;text-transform:uppercase;color:rgba(232,201,154,.45);margin-top:1.5rem;font-weight:500;">The 7/12 Wale Investment Thesis</div>
+    </div>
+  </div>
+</div>
+
+<!-- INFRASTRUCTURE DEEP DIVE -->
+<section id="infra-detail">
+  <div class="section-header-left reveal">
+    <span class="sec-label">The Infrastructure Thesis</span>
+    <h2>The Projects Driving <em>Mumbai 3.0's Growth</em></h2>
+    <p>Massive infrastructure is transforming this region, boosting accessibility, land value, and long-term investment potential.</p>
+  </div>
+  <div class="infra-cards-grid">
+    <div class="infra-card reveal">
+      <div class="infra-card-img">
+        <img src="https://github.com/qwuitty-prog/7-12-Waale/blob/main/assets/NMIA.png?raw=true" alt="Navi Mumbai International Airport"/>
+        <span class="infra-card-tag air">Aviation</span>
+      </div>
+      <div class="ic-body">
+        <h3>Navi Mumbai International Airport</h3>
+        <p>The closest land to a brand-new international airport, putting Panvel and Uran at the centre of MMR's next growth story.</p>
+        <div class="ic-stat"><span class="ic-chip">60M pax capacity</span><span class="ic-chip">Phase 1 operational</span></div>
+      </div>
+    </div>
+    <div class="infra-card reveal reveal-delay-1">
+      <div class="infra-card-img">
+        <img src="https://github.com/qwuitty-prog/7-12-Waale/blob/main/assets/atal_setu-1.png?raw=true" alt="Atal Setu Sea Link"/>
+        <span class="infra-card-tag sea">Sea Link</span>
+      </div>
+      <div class="ic-body">
+        <h3>Atal Setu Sea Link</h3>
+        <p>India's longest sea bridge cuts the drive from South Mumbai to under 20 minutes, opening the belt to the entire city.</p>
+        <div class="ic-stat"><span class="ic-chip">21.8 km</span><span class="ic-chip">Operational</span></div>
+      </div>
+    </div>
+    <div class="infra-card reveal reveal-delay-2">
+      <div class="infra-card-img">
+        <img src="https://github.com/qwuitty-prog/7-12-Waale/blob/main/assets/railway.png?raw=true" alt="Railway Local Connectivity"/>
+        <span class="infra-card-tag road">Railway</span>
+      </div>
+      <div class="ic-body">
+        <h3>Railway Local Connectivity</h3>
+        <p>A local railway line already runs from Belapur to Uran, connecting Mumbai 3.0 villages to the city's suburban rail grid.</p>
+        <div class="ic-stat"><span class="ic-chip">Belapur to Uran</span><span class="ic-chip">Operational</span></div>
+      </div>
+    </div>
+    <div class="infra-card reveal">
+      <div class="infra-card-img">
+        <img src="https://github.com/qwuitty-prog/7-12-Waale/blob/main/assets/alibaug-virar.png?raw=true" alt="Alibaug Virar Multimodal Corridor"/>
+        <span class="infra-card-tag smart">Corridor</span>
+      </div>
+      <div class="ic-body">
+        <h3>Alibaug-Virar Multimodal Corridor</h3>
+        <p>A 126 km coastal corridor passing through the Mumbai 3.0 belt, linking the full MMR coastline in one continuous route.</p>
+        <div class="ic-stat"><span class="ic-chip">126 km</span><span class="ic-chip">Under development</span></div>
+      </div>
+    </div>
+    <div class="infra-card reveal reveal-delay-1">
+      <div class="infra-card-img">
+        <img src="https://github.com/qwuitty-prog/7-12-Waale/blob/main/assets/METRO.png?raw=true" alt="Metro Connectivity"/>
+        <span class="infra-card-tag metro">Metro</span>
+      </div>
+      <div class="ic-body">
+        <h3>Metro Connectivity</h3>
+        <p>MMRDA metro lines are being extended into Uran, Panvel and Pen, bringing mass rapid transit to the belt for the first time.</p>
+        <div class="ic-stat"><span class="ic-chip">MMRDA planned</span><span class="ic-chip">Upcoming</span></div>
+      </div>
+    </div>
+    <div class="infra-card reveal reveal-delay-2">
+      <div class="infra-card-img">
+        <img src="https://github.com/qwuitty-prog/7-12-Waale/blob/main/assets/JNPT.png?raw=true" alt="JNPT Port"/>
+        <span class="infra-card-tag sea">Commercial</span>
+      </div>
+      <div class="ic-body">
+        <h3>JNPT Port (Commercial)</h3>
+        <p>India's largest container port sits right next to Mumbai 3.0, generating steady industrial and logistics demand across the belt.</p>
+        <div class="ic-stat"><span class="ic-chip">India's #1 port</span><span class="ic-chip">Adjacent to belt</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WEALTH CREATION -->
+<section id="wealth">
+  <div class="wc-bg1"></div>
+  <div class="wc-bg2"></div>
+  <div class="wealth-grid">
+    <div class="wealth-text reveal-left">
+      <span class="sec-label">Why Invest Here</span>
+      <h2 class="sec-title">Why Choose <em>Mumbai 3.0</em><br>for Land Investment</h2>
+      <div class="wealth-body">
+        <p>With <strong>government-backed planning</strong> and increasing demand, land values in <span style="color:var(--gold);font-weight:700;">Mumbai 3.0</span> are expected to rise significantly. Whether a first-time buyer or seasoned investor, this region offers <span class="hl-underline" style="text-decoration-color:var(--gold);">flexibility for every investment goal.</span></p>
+      </div>
+      <div class="wealth-items">
+        <div class="wealth-item"><div class="wi-icon">🚀</div><div><h4>Next Big Growth Corridor</h4><p>Set to become the next major hub, mirroring how Navi Mumbai evolved from concept to city.</p></div></div>
+        <div class="wealth-item"><div class="wi-icon">🏗️</div><div><h4>Massive Infrastructure</h4><p>NMIA, improved highways, and metro connectivity already boosting accessibility and land value.</p></div></div>
+        <div class="wealth-item"><div class="wi-icon">🔗</div><div><h4>Strategic Connectivity</h4><p>Excellent access to Mumbai, Navi Mumbai, and Pune via expressways and upcoming transport networks.</p></div></div>
+        <div class="wealth-item"><div class="wi-icon">💰</div><div><h4>Affordable Entry Point</h4><p>Still affordable vs. saturated urban areas. A rare early-entry window for long-term appreciation.</p></div></div>
+        <div class="wealth-item"><div class="wi-icon">📐</div><div><h4>Planned Urban Development</h4><p>Wider roads, better zoning, organised layouts ensure structured growth, not chaotic sprawl.</p></div></div>
+      </div>
+    </div>
+    <div class="stat-boxes reveal-right">
+      <div class="sb"><div class="big">₹20L<span style="font-size:1.2rem;">cr</span></div><div class="sm">WEF 2026 Investments Secured by MMRDA</div></div>
+      <div class="sb"><div class="big">24</div><div class="sm">MoUs Signed in First 3 Days at Davos</div></div>
+      <div class="sb"><div class="big">124</div><div class="sm">Villages Covered in the Mumbai 3.0 Belt</div></div>
+      <div class="sb"><div class="big">100%</div><div class="sm">Clear 7/12-Verified Titles in Our Portfolio</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section id="cta-banner">
+  <div class="cta-ambient1"></div>
+  <div class="cta-ambient2"></div>
+  <div class="cta-grid-lines"></div>
+  <div class="cta-inner reveal">
+    <span class="sec-label">Get Started Today</span>
+    <h2>Your Plots Inside <em>Mumbai 3.0</em> Are Waiting.</h2>
+    <p>The planned urban region between Mumbai and Navi Mumbai is being built right now and so is your opportunity. Talk to our team for a free 7/12 consultation and find the right plot in the <span style="color:var(--gold);font-weight:600;">Mumbai 3.0</span> belt for your goals.</p>
+    <div class="cta-btns">
+      <a href="contact.html" class="btn-gold-solid">Book a Free Consultation &rarr;</a>
+      <a href="contact.html" class="btn-ghost">Browse All Plots</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo-main">7/12 <span>Wale</span></div>
+      <span class="footer-sub">Plots &amp; Land Experts · Maharashtra</span>
+      <p>We simplify land and plot ownership across Maharashtra, clear 7/12 records, verified titles, and trusted guidance from search to registration.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Locations</h4>
+      <ul>
+        <li><a href="contact.html">Panvel</a></li>
+        <li><a href="contact.html">Pen</a></li>
+        <li><a href="contact.html">Alibaug</a></li>
+        <li><a href="contact.html">Khopoli</a></li>
+        <li><a href="contact.html">Uran</a></li>
+        <li><a href="contact.html">Karjat</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Plot Types</h4>
+      <ul>
+        <li><a href="contact.html">NA Residential</a></li>
+        <li><a href="contact.html">Agricultural Land</a></li>
+        <li><a href="contact.html">NA Industrial</a></li>
+        <li><a href="contact.html">Open Plots</a></li>
+        <li><a href="contact.html">Farm Plots</a></li>
+        <li><a href="contact.html">Investment Plots</a></li>
+      </ul>
+    </div>
+  </div>
+  <hr class="footer-divider"/>
+  <div class="footer-bottom">
+    <p>© 2025 7/12 Wale. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Use</a>
+      <a href="#">Disclaimer</a>
+    </div>
+  </div>
+</footer>
+
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Scroll to top">↑</button>
+
+<script>
+  // ── NAV SCROLL ──
+  const nav = document.getElementById('navbar');
+  const scrollBtn = document.getElementById('scrollTop');
+
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+    scrollBtn.classList.toggle('visible', window.scrollY > 500);
+  });
+
+  function toggleMenu() {
+    const links   = document.getElementById('navLinks');
+    const burger  = document.getElementById('hamburger');
+    const overlay = document.getElementById('navOverlay');
+    const isOpen  = links.classList.contains('open');
+    if (isOpen) { closeMenu(); }
+    else {
+      links.classList.add('open');
+      burger.classList.add('open');
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+  function closeMenu() {
+    document.getElementById('navLinks').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
+    document.getElementById('navOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+
+  // ── HERO SLIDESHOW ──
+  const SLIDE_DURATION = 7000; // ms per slide
+  const slides = Array.from(document.querySelectorAll('.hero-slide'));
+  let current = 0;
+
+  function nextSlide() {
+    slides[current].classList.remove('active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('active');
+  }
+
+  // Start first slide immediately
+  slides[0].classList.add('active');
+  setInterval(nextSlide, SLIDE_DURATION);
+
+  // ── SCROLL REVEAL ──
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.10 });
+
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
